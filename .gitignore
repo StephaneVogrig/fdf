@@ -1,0 +1,5 @@
+*libmlx.a
+*libmlx_Linux.a
+*.o
+fdf/mlx_linux/test/mlx-test
+fdf/fdf
