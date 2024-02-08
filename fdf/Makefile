@@ -6,7 +6,7 @@
 #    By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/03 19:41:13 by stephane          #+#    #+#              #
-#    Updated: 2024/02/07 13:34:59 by svogrig          ###   ########.fr        #
+#    Updated: 2024/02/08 03:24:28 by svogrig          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,14 @@ NAME		:=	fdf
 
 DIR_SRC		:=	src
 SRC			:=	main.c \
-				exit.c
+				draw_line.c \
+				event.c \
+				exit.c \
+				image.c \
+				point2d.c \
+				render.c \
+				window.c
+
 SRC			:=	$(SRC:%=$(DIR_SRC)/%)
 
 # includes --------------------------------------------------------------------#
