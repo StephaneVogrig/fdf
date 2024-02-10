@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 19:04:55 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/09 16:03:53 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/10 21:11:21 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ t_bool		error_perror(char *error_msg);
 
 /* int -----------------------------------------------------------------------*/
 int			ft_atoi(const char *nptr);
+int			atoi_offset(char **str);
 char		*ft_itoa(int n);
+int			hextoi_offset(char **str);
 char		*si32_to_decstr_offset(char *str, int n);
 t_si32		si32_min(t_si32 a, t_si32 b);
 t_si32		si32_max(t_si32 a, t_si32 b);

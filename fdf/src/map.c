@@ -6,53 +6,11 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 15:46:08 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/10 02:08:09 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/10 21:06:26 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-static int	hextoi_offset(char **str)
-{
-	int	nbr;
-
-	*str += 2;
-	nbr = 0;
-	while (is_hexagit(**str))
-	{
-		if ('0' <= **str && **str <= '9')
-			nbr = nbr * 16 + **str - '0';
-		else if ('a' <= **str && **str <= 'f')
-			nbr = nbr * 16 + 10 + **str - 'a';
-		else if ('A' <= **str && **str <= 'F')
-			nbr = nbr * 16 + 10 + **str - 'A';
-		(*str)++;
-	}
-	return (nbr);
-}
-
-static int	atoi_offset(char **str)
-{
-	int	nbr;
-	int	sign;
-
-	nbr = 0;
-	sign = 1;
-	while (**str == ' ')
-		(*str)++;
-	if (**str == '-')
-	{
-		sign = -1;
-		(*str)++;
-	}
-	while (ft_isdigit(**str))
-	{
-		nbr = nbr * 10 + (**str - '0');
-		(*str)++;
-	}
-	nbr *= sign;
-	return (nbr);
-}
 
 void	line_to_data(char *str, t_data *data_line)
 {
