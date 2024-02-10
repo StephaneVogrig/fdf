@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 03:14:41 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/10 20:20:37 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/10 21:42:36 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,21 @@ void	draw_line_hor(t_img *img, int y, int xa, int xb)
 
 void	draw_line_diag(t_img *img, t_point2d a, t_point2d b)
 {
-	int px;
-	int py;
+	int dx;
+	int dy;
 
-	if (b.x - a.x > 0 )
-		px = 1;
+	if (a.x < b.x )
+		dx = 1;
 	else
-		px = -1;
-	if (b.y - a.y > 0 )
-		py = 1;
+		dx = -1;
+	if (a.y < b.y)
+		dy = 1;
 	else
-		py = -1;
-
+		dy = -1;
 	while (a.x != b.x)
 	{
-		a.x += px;
-		a.y += py;
+		a.x += dx;
+		a.y += dy;
 		img_set_pixel(img, a.x, a.y, 0x00FF0000);
 	}
 }
@@ -59,7 +58,6 @@ void	draw_line_vert(t_img *img, int x, int ya, int yb)
 void	draw_line_oblique(t_img *img, t_point2d a, t_point2d b, t_vec2d d)
 {
 	t_vec2d	abs_d;
-
 	abs_d.x = abs(d.x);
 	abs_d.y = abs(d.y);
 	if (abs_d.x == abs_d.y)
@@ -84,6 +82,7 @@ void	draw_line(t_img *img, t_point2d a, t_point2d b)
 {
 	t_vec2d	d;
 
+	// ft_printf("ax:%i, ay:%i, bx:%i, by:%i\n", a.x, a.y, b.x, b.y);
 	if (a.x == b.x)
 		draw_line_vert(img, a.x, a.y, b.y);
 	else if (a.y == b.y)
