@@ -6,13 +6,13 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 00:00:04 by svogrig           #+#    #+#             */
-/*   Updated: 2023/11/14 18:51:03 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/09 15:49:44 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	free_split(char **split)
+void	ft_split_free(char **split)
 {
 	int	i;
 
@@ -71,7 +71,7 @@ static int	fill_split(char **split, char const *s, char c)
 	return (1);
 }
 
-static size_t	count_words(char const *str, char c)
+size_t	count_words(char const *str, char c)
 {
 	size_t	nbr_words;
 
@@ -101,7 +101,7 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	if (fill_split(split, s, c) == 0)
 	{
-		free_split(split);
+		ft_split_free(split);
 		return (NULL);
 	}
 	split[nbr_words] = NULL;

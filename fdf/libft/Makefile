@@ -6,7 +6,7 @@
 #    By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/02 02:59:52 by svogrig           #+#    #+#              #
-#    Updated: 2024/02/06 17:43:08 by svogrig          ###   ########.fr        #
+#    Updated: 2024/02/09 16:06:46 by svogrig          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,16 @@ NAME = libft.a
 INCS		:=	include
 
 SRC_DIR		:=	src
-SRCS 		:=	char/ft_isalnum.c\
-				char/ft_isalpha.c\
-				char/ft_isascii.c\
-				char/ft_isdigit.c\
-				char/ft_isprint.c\
+SRCS 		:=	char/ft_isalnum.c \
+				char/ft_isalpha.c \
+				char/ft_isascii.c \
+				char/ft_isdigit.c \
+				char/ft_isprint.c \
 				char/ft_toupper.c \
 				char/ft_tolower.c \
+				char/is_hexagit.c \
+				error/error_msg.c \
+				error/error_perror.c \
 				int/ft_atoi.c \
 				int/ft_itoa.c \
 				int/si32_min.c \

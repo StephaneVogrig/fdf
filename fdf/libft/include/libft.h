@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 19:04:55 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/05 00:22:39 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/09 16:03:53 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ int			ft_isdigit(int c);
 int			ft_isprint(int c);
 int			ft_tolower(int c);
 int			ft_toupper(int c);
+int			is_hexagit(char c);
+
+/* error ---------------------------------------------------------------------*/
+t_bool		error_msg(char *error_msg);
+t_bool		error_perror(char *error_msg);
 
 /* int -----------------------------------------------------------------------*/
 int			ft_atoi(const char *nptr);
@@ -72,6 +77,8 @@ void		ft_putnbr_fd(int n, int fd);
 
 /* str -----------------------------------------------------------------------*/
 char		**ft_split(char const *s, char c);
+void		ft_split_free(char **split);
+size_t		count_words(char const *str, char c);
 char		*ft_strchr(const char *s, int c);
 int			ft_strcmp(const char *s1, const char *s2);
 char		*ft_strdup(const char *s);
