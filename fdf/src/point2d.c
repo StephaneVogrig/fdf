@@ -6,17 +6,18 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 01:47:57 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/08 01:48:34 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/10 07:58:37 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_point2d	point2d(int x, int y)
+t_point2d	point2d(int x, int y, int color)
 {
 	t_point2d	p;
 
 	p.x = x;
 	p.y = y;
+	p.color = color;
 	return (p);
 }

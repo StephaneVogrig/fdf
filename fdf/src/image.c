@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 03:23:17 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/08 03:23:54 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/10 20:21:39 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,13 @@ void	img_clean(t_img *img)
 	}
 }
 
-void	img_set_pixel(t_img *img, int x, int y, int color)
+inline void	img_set_pixel(t_img *img, int x, int y, int color)
 {
-	char	*pixel;
+	// char	*pixel;
 
-	pixel = img->data + (y * img->size_line + x * (img->bpp / 8));
-	*(int *)pixel = color;
+	// pixel = img->data + (y * img->size_line + x * (img->bpp >> 3));
+	// *(unsigned int *)pixel = color;
+
+
+	*(t_ui32 *)(img->data + y * img->size_line + x * (img->bpp >> 3)) = color;
 }

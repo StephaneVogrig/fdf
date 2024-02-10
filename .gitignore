@@ -1,5 +1,9 @@
 *libmlx.a
 *libmlx_Linux.a
 *.o
+*.d
 fdf/mlx_linux/test/mlx-test
 fdf/fdf
+gmon.out
+*.vscode
+

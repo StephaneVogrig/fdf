@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 03:14:41 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/08 03:15:26 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/10 20:20:37 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	draw_line_diag(t_img *img, t_point2d a, t_point2d b)
 	{
 		a.x += px;
 		a.y += py;
-		img_set_pixel(img, a.x, a.y, 0x00FFFFFF);
+		img_set_pixel(img, a.x, a.y, 0x00FF0000);
 	}
 }
 
@@ -56,23 +56,42 @@ void	draw_line_vert(t_img *img, int x, int ya, int yb)
 		img_set_pixel(img, x, y++, 0x00FFFFFF);
 }
 
+void	draw_line_oblique(t_img *img, t_point2d a, t_point2d b, t_vec2d d)
+{
+	t_vec2d	abs_d;
+
+	abs_d.x = abs(d.x);
+	abs_d.y = abs(d.y);
+	if (abs_d.x == abs_d.y)
+		draw_line_diag(img, a, b);
+	else if (abs_d.y < abs_d.x)
+    {
+	 	if (a.x < b.x)
+            draw_line_bresenham_x(img, a, b, abs_d);
+     	else
+     	    draw_line_bresenham_x(img, b, a, abs_d);
+	}
+    else
+	{
+        if (a.y < b.y)
+            draw_line_bresenham_y(img, a, b, abs_d);
+        else
+            draw_line_bresenham_y(img, b, a, abs_d);
+    }
+}
+
 void	draw_line(t_img *img, t_point2d a, t_point2d b)
 {
+	t_vec2d	d;
+
 	if (a.x == b.x)
 		draw_line_vert(img, a.x, a.y, b.y);
-	if (a.y == b.y)
+	else if (a.y == b.y)
 		draw_line_hor(img, a.y, a.x, b.x);
-	if (abs(a.x - b.x) == abs(a.y - b.y))
-		draw_line_diag(img, a, b);
-	
-	// int x;
-	// int y;
-	// int	color;
-
-	// x = 10;
-	// y = 10;
-	// color = 0x00FFFFFF;
-
-	// while (x < 100)
-	// 	img_set_pixel(img, x++, y, color);
+	else
+	{
+		d.x = b.x - a.x;
+		d.y = b.y - a.y;
+		draw_line_oblique(img, a, b, d);
+	}
 }
