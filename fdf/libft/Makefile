@@ -6,7 +6,7 @@
 #    By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/02 02:59:52 by svogrig           #+#    #+#              #
-#    Updated: 2024/02/11 20:37:55 by svogrig          ###   ########.fr        #
+#    Updated: 2024/02/11 21:49:00 by svogrig          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,10 @@ SRCS 		:=	char/ft_isalnum.c \
 				ft_printf/ui64_to_str.c \
 				ft_printf/vs_10pow.c \
 				unit_test/unit_test.c \
-				vector.c \
+				vector/vector2f.c \
+				vector/vector3f.c \
+				vector/vector2i.c \
+				vector/vector3i.c \
 				get_next_line.c
 
 SRCS		:=	$(SRCS:%=$(SRC_DIR)/%)

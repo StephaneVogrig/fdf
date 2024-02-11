@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 20:24:59 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/11 20:45:36 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/11 21:49:54 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,42 @@
 
 # include "vs_type.h"
 
-typedef struct s_vec2d_int{
+typedef struct s_vec2d_int32{
 	t_si32	x;
 	t_si32	y;
-}	t_vec2d;
+}	t_vec2i;
 
-typedef struct s_vec3d_int{
+t_vec2i	vector2i(t_si32 x, t_si32 y);
+t_vec2i	vector2i_sub(t_vec2i point_a, t_vec2i point_b);
+t_vec2i	vector2i_add(t_vec2i point_a, t_vec2i point_b);
+
+typedef struct s_vec3d_int32{
 	t_si32	x;
 	t_si32	y;
 	t_si32	z;
-}	t_vec3d;
+}	t_vec3i;
 
-t_vec2d	vector2d(t_vec2d point_a, t_vec2d point_b);
-t_vec3d	vector3d(t_vec3d point_a, t_vec3d point_b);
+t_vec3i	vector3i(t_si32 x, t_si32 y, t_si32 z);
+t_vec3i	vector3i_sub(t_vec3i point_a, t_vec3i point_b);
+t_vec3i	vector3i_add(t_vec3i point_a, t_vec3i point_b);
+
+typedef struct s_vec2_float32{
+	t_float32	x;
+	t_float32	y;
+}	t_vec2f;
+
+t_vec2f	vector2f(t_float32 x, t_float32 y);
+t_vec2f	vector2f_sub(t_vec2f point_a, t_vec2f point_b);
+t_vec2f	vector2f_add(t_vec2f point_a, t_vec2f point_b);
+
+typedef struct s_vec3_float32{
+	t_float32	x;
+	t_float32	y;
+	t_float32	z;
+}	t_vec3f;
+
+t_vec3f	vector3f(t_float32 x, t_float32 y, t_float32 z);
+t_vec3f	vector3f_sub(t_vec3f point_a, t_vec3f point_b);
+t_vec3f	vector3f_add(t_vec3f point_a, t_vec3f point_b);
 
 #endif
