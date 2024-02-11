@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 19:04:55 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/10 21:11:21 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/11 20:39:58 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "ft_printf.h"
 # include "unit_test.h"
 # include "get_next_line.h"
+# include "vector.h"
 
 /* char ----------------------------------------------------------------------*/
 int			ft_isalnum(int c);
