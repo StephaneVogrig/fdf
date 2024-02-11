@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:45:03 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/07 00:58:24 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/11 20:43:35 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,5 @@
 # ifndef STDERR
 #  define STDERR 2
 # endif
-
 
 #endif

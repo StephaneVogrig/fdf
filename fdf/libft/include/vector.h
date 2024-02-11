@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 20:24:59 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/11 20:39:44 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/11 20:45:36 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 # include "vs_type.h"
 
-
-typedef	struct s_vec2d_int{
+typedef struct s_vec2d_int{
 	t_si32	x;
 	t_si32	y;
 }	t_vec2d;
