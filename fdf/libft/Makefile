@@ -6,7 +6,7 @@
 #    By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/02 02:59:52 by svogrig           #+#    #+#              #
-#    Updated: 2024/02/11 21:49:00 by svogrig          ###   ########.fr        #
+#    Updated: 2024/02/12 03:17:45 by svogrig          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRCS 		:=	char/ft_isalnum.c \
 				int/ft_atoi.c \
 				int/atoi_offset.c \
 				int/ft_itoa.c \
-				int/hextoi_offset.c \
+				int/hexatoi_offset.c \
 				int/si32_min.c \
 				int/si32_max.c \
 				int/si32_to_decstr_offset.c \

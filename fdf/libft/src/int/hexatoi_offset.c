@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hextoi_offset.c                                    :+:      :+:    :+:   */
+/*   hexatoi_offset.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 21:03:29 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/10 21:12:20 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/12 03:23:15 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	hextoi_offset(char **str)
+int	hexatoi_offset(char **str)
 {
 	int	nbr;
 
-	*str += 2;
 	nbr = 0;
 	while (is_hexagit(**str))
 	{
