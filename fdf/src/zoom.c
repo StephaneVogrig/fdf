@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   zoom.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/03 19:07:16 by stephane          #+#    #+#             */
-/*   Updated: 2024/02/13 07:00:26 by svogrig          ###   ########.fr       */
+/*   Created: 2024/02/13 06:42:19 by svogrig           #+#    #+#             */
+/*   Updated: 2024/02/13 06:42:44 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	main(int argc, char **argv)
+void	zoom_decrease(t_map *map, t_img *img, t_transform *transform)
 {
-	int		fd;
-	t_fdf	fdf_var;
-	t_bool	ok;
+	transform->scale *= 0.9;
+	img_clear(map, img, transform);
+	map_to_img(map, img, transform);
+	map->is_update = TRUE;
+}
 
-	if (argc != 2)
-		return (0);
-	fdf_init(&fdf_var);
-	ok = map_load(argv[1], &fdf_var.map);
-	if (ok)
-		ok = mlx_setup(&fdf_var);
-	if (ok)
-	{
-		fdf_var.transform = transform_init(&fdf_var.map, fdf_var.img);
-		event_setup(&fdf_var);
-		map_to_img(&fdf_var.map, fdf_var.img, &fdf_var.transform);
-		mlx_loop(fdf_var.mlx);
-	}
-	fdf_clean(&fdf_var);
-	return (0);
+void	zoom_increase(t_map *map, t_img *img, t_transform *transform)
+{
+	transform->scale *= 1.1;
+	img_clear(map, img, transform);
+	map_to_img(map, img, transform);
+	map->is_update = TRUE;
 }

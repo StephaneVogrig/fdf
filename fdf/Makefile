@@ -6,7 +6,7 @@
 #    By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/03 19:41:13 by stephane          #+#    #+#              #
-#    Updated: 2024/02/10 07:23:00 by svogrig          ###   ########.fr        #
+#    Updated: 2024/02/13 06:46:02 by svogrig          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,17 @@ SRC			:=	main.c \
 				draw_line.c \
 				event.c \
 				exit.c \
+				fdf.c \
 				image.c \
 				map.c \
+				map_display.c \
+				mlx.c \
 				point2d.c \
 				render.c \
-				window.c
+				transform.c \
+				window.c \
+				zoom.c \
+				debug.c
 
 SRC			:=	$(SRC:%=$(DIR_SRC)/%)
 
@@ -59,7 +65,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@$(MAKE) -j -C libft
 	@$(MAKE) -C mlx_linux
-	@$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -Llibft -lft -o $(NAME)
+	@$(CC) $(cc_FLAGS) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -Llibft -lft -o $(NAME)
 	$(info created : $(NAME))
 	
 $(DIR_BUILD)/%.o: $(DIR_SRC)/%.c

@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 03:14:41 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/10 21:42:36 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/12 04:38:18 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	draw_line_vert(t_img *img, int x, int ya, int yb)
 		img_set_pixel(img, x, y++, 0x00FFFFFF);
 }
 
-void	draw_line_oblique(t_img *img, t_point2d a, t_point2d b, t_vec2d d)
+void	draw_line_oblique(t_img *img, t_point2d a, t_point2d b, t_vec2i d)
 {
-	t_vec2d	abs_d;
+	t_vec2i	abs_d;
 	abs_d.x = abs(d.x);
 	abs_d.y = abs(d.y);
 	if (abs_d.x == abs_d.y)
@@ -80,7 +80,7 @@ void	draw_line_oblique(t_img *img, t_point2d a, t_point2d b, t_vec2d d)
 
 void	draw_line(t_img *img, t_point2d a, t_point2d b)
 {
-	t_vec2d	d;
+	t_vec2i	d;
 
 	// ft_printf("ax:%i, ay:%i, bx:%i, by:%i\n", a.x, a.y, b.x, b.y);
 	if (a.x == b.x)

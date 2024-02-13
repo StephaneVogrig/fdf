@@ -6,16 +6,16 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 07:21:44 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/10 18:11:26 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/13 07:18:34 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_line_bresenham_x(t_img *img, t_point2d a, t_point2d b, t_vec2d d)
+void	draw_line_bresenham_x(t_img *img, t_point2d a, t_point2d b, t_vec2i d)
 {
-	int i;
-	int err;
+	int	i;
+	int	err;
 
 	if (a.y > b.y)
 		i = -1;
@@ -37,10 +37,10 @@ void	draw_line_bresenham_x(t_img *img, t_point2d a, t_point2d b, t_vec2d d)
 	}
 }
 
-void	draw_line_bresenham_y(t_img *img, t_point2d a, t_point2d b, t_vec2d d)
+void	draw_line_bresenham_y(t_img *img, t_point2d a, t_point2d b, t_vec2i d)
 {
-	int i;
-	int err;
+	int	i;
+	int	err;
 
 	if (a.x > b.x)
 		i = -1;
