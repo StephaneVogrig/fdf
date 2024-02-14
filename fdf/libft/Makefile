@@ -6,7 +6,7 @@
 #    By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/02 02:59:52 by svogrig           #+#    #+#              #
-#    Updated: 2024/02/12 03:17:45 by svogrig          ###   ########.fr        #
+#    Updated: 2024/02/14 01:54:34 by svogrig          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS 		:=	char/ft_isalnum.c \
 				error/error_msg.c \
 				error/error_perror.c \
 				int/ft_atoi.c \
+				int/ft_abs.c \
 				int/atoi_offset.c \
 				int/ft_itoa.c \
 				int/hexatoi_offset.c \

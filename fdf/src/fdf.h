@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:03:51 by stephane          #+#    #+#             */
-/*   Updated: 2024/02/13 06:53:30 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/14 04:48:28 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "mlx_int.h"
 # include "mlx.h"
 # include "libft.h"
+# include "pixel.h"
+# include "color.h"
 
 # define FDF_BUFFER_SIZE 10
 # define WINDOW_WIDTH 1600
@@ -32,27 +34,21 @@
 # define MOUSE_BUTTON_RELEASE 5
 # define MOUSE_MOVE 6
 
-typedef struct s_point2d_si32{
-	union {
-		struct {
-			t_si32	x;
-			t_si32	y;
-		};
-		t_vec2i		vec2i;
-	};
-	t_ui32	color;
-}	t_point2d;
+# define ARGB_WHITE 0x00ffffff
+# define ARGB_RED 0x00ff0000
+# define ARGB_BLUE 0x0000ff00
+# define ARGB_GREEN 0x000000ff
 
 typedef struct s_data{
-	int	z;
-	int	color;
+	int		z;
+	t_ui32	color;
 }	t_data;
 
 typedef struct s_map{
 	int			nbr_line;
 	int			nbr_col;
 	t_data		**datas;
-	t_point2d	*buffer;
+	t_pixel		*buffer;
 	t_bool		is_update;
 }	t_map;
 
@@ -72,12 +68,13 @@ typedef struct s_fdf{
 	void		*mlx;
 	void		*win;
 	t_img		*img;
+	t_map		map;
+	t_transform	transform;
 	struct{
 		t_ui8	left_button_is_press : 1;
 		t_ui8	right_button_is_press : 1;
 	};
-	t_map		map;
-	t_transform	transform;
+	t_vec2i		last_mouse_pos;
 }	t_fdf;
 
 typedef struct s_bounding2d_int{
@@ -88,13 +85,11 @@ typedef struct s_bounding2d_int{
 t_bound2i	bounding_box_2d(t_map *map, t_transform *transform);
 
 /* draw-line ----------------------------------------------------------------*/
-void		draw_line(t_img *img, t_point2d a, t_point2d b);
+void		draw_line(t_img *img, t_pixel a, t_pixel b);
 
 /* bresenham -----------------------------------------------------------------*/
-void		draw_line_bresenham_y(t_img *img, \
-			t_point2d a, t_point2d b, t_vec2i d);
-void		draw_line_bresenham_x(t_img *img, \
-			t_point2d a, t_point2d b, t_vec2i d);
+void		draw_line_bresenham_y(t_img *img, t_pixel a, t_pixel b, t_vec2i d);
+void		draw_line_bresenham_x(t_img *img, t_pixel a, t_pixel b, t_vec2i d);
 
 /* event ---------------------------------------------------------------------*/
 int			on_key_press(int keycode, t_fdf *data);
@@ -114,11 +109,11 @@ void		fdf_clean(t_fdf *fdf);
 /* image ---------------------------------------------------------------------*/
 void		img_clean(t_map *map, t_img *img, t_transform *transform);
 void		img_clear(t_map *map, t_img *img, t_transform *transform);
-void		img_set_pixel(t_img *img, int x, int y, int color);
+void		img_set_pixel(t_img *img, int x, int y, t_ui32 color);
 
 /* map to img ----------------------------------------------------------------*/
 void		map_to_img(t_map *map, t_img *img, t_transform *transform);
-t_point2d	projection(int x, int y, t_data data, t_transform *t);
+t_pixel		projection(int x, int y, t_data data, t_transform *t);
 
 /* map -----------------------------------------------------------------------*/
 t_bool		map_load(char *path, t_map *map);
@@ -127,7 +122,7 @@ t_bool		map_load(char *path, t_map *map);
 t_bool		mlx_setup(t_fdf *data);
 
 /* point2d -------------------------------------------------------------------*/
-t_point2d	point2d(int x, int y, int color);
+t_pixel		pixel(int x, int y, t_ui32 color);
 
 /* render --------------------------------------------------------------------*/
 int			render(t_fdf *data);

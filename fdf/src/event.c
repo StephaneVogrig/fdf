@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 03:07:35 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/13 07:05:33 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/14 05:17:33 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	on_key_press(int keycode, t_fdf *data)
 	if (keycode == 65307)
 		mlx_loop_end(data->mlx);
 	else if (keycode == 111)
-		draw_line(data->img, point2d(100, 100, 0x0000ff00), point2d(110, 300, 0x0000ff00));
+		draw_line(data->img, pixel(100, 100, 0x00ff0000), pixel(110, 300, 0x00ff0000));
 
 	printf("key pressed: %d\n", keycode);
 	return (0);

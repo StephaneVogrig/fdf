@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 19:04:55 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/12 03:14:24 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/14 01:52:17 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,7 @@ typedef struct s_tabsi32{
 
 t_tabsi32	tabsi32_init(int *tab, int size);
 void		tabsi32_print(t_tabsi32 d, char *before, char *sep, char *after);
+
+t_si32		ft_abs(t_si32 a);
 
 #endif

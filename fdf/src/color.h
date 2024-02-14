@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   point2d.c                                          :+:      :+:    :+:   */
+/*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 01:47:57 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/12 04:37:39 by svogrig          ###   ########.fr       */
+/*   Created: 2024/02/13 20:04:41 by svogrig           #+#    #+#             */
+/*   Updated: 2024/02/14 01:50:36 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#ifndef COLOR_H
+# define COLOR_H
 
-t_point2d	point2d(int x, int y, int color)
-{
-	t_point2d	p;
+# include "libft.h"
 
-	p.x = x;
-	p.y = y;
-	p.color = color;
-	return (p);
-}
+typedef union u_color{
+	t_ui32	argb;
+	struct{
+		t_ui32	a : 8;
+		t_ui32	r : 8;
+		t_ui32	g : 8;
+		t_ui32	b : 8;
+	};
+}	t_color;
+
+t_ui32	color(t_ui8 a, t_ui8 r, t_ui8 g, t_ui8 b);
+
+#endif

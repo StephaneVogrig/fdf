@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 03:23:17 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/13 07:30:52 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/14 05:21:49 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	img_clean(t_map *map, t_img *img, t_transform *transform)
 		x = 0;
 		while (x < img->width)
 		{
-			img_set_pixel(img, x++, y, 0);
+			img_set_pixel(img, x++, y, color(0,0,0,0));
 		}
 		y++;
 	}
@@ -49,7 +49,7 @@ void	img_clean(t_map *map, t_img *img, t_transform *transform)
 	map->is_update = TRUE;
 }
 
-inline void	img_set_pixel(t_img *img, int x, int y, int color)
+inline void	img_set_pixel(t_img *img, int x, int y, t_ui32 color)
 {
 	char	*pixel;
 

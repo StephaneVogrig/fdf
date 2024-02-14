@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:51:07 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/13 07:06:48 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/13 19:38:00 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,31 +68,31 @@ void	draw_sqare(t_img *img, int x, int y, int color)
 void	test_line_bresenham(t_img	*img)
 {
 		// bresenham_x
-		draw_line(img, point2d(400, 200, 0x0000ff00), point2d(400 + 100, 200 + 50, 0x0000ff00));
-		draw_line(img, point2d(400, 200, 0x0000ff00), point2d(400 + 100, 200 - 50, 0x0000ff00));
+		draw_line(img, pixel(400, 200, 0x0000ff00), pixel(400 + 100, 200 + 50, 0x0000ff00));
+		draw_line(img, pixel(400, 200, 0x0000ff00), pixel(400 + 100, 200 - 50, 0x0000ff00));
 
-		draw_line(img, point2d(400, 200, 0x0000ff00), point2d(400 - 100, 200 + 50, 0x0000ff00));
-		draw_line(img, point2d(400, 200, 0x0000ff00), point2d(400 - 100, 200 - 50, 0x0000ff00));
+		draw_line(img, pixel(400, 200, 0x0000ff00), pixel(400 - 100, 200 + 50, 0x0000ff00));
+		draw_line(img, pixel(400, 200, 0x0000ff00), pixel(400 - 100, 200 - 50, 0x0000ff00));
 
 		// bresenham_y
-		draw_line(img, point2d(400, 200, 0x000000ff), point2d(400 + 50, 200 - 100, 0x000000ff));
-		draw_line(img, point2d(400, 200, 0x000000ff), point2d(400 - 50, 200 - 100, 0x000000ff));
+		draw_line(img, pixel(400, 200, 0x000000ff), pixel(400 + 50, 200 - 100, 0x000000ff));
+		draw_line(img, pixel(400, 200, 0x000000ff), pixel(400 - 50, 200 - 100, 0x000000ff));
 
-		draw_line(img, point2d(400, 200, 0x000000ff), point2d(400 + 50, 200 + 100, 0x000000ff));
-		draw_line(img, point2d(400, 200, 0x000000ff), point2d(400 - 50, 200 + 100, 0x000000ff));
+		draw_line(img, pixel(400, 200, 0x000000ff), pixel(400 + 50, 200 + 100, 0x000000ff));
+		draw_line(img, pixel(400, 200, 0x000000ff), pixel(400 - 50, 200 + 100, 0x000000ff));
 }
 
 void	test_line_simple(t_img	*img)
 {
 		//ligne droite
-		draw_line(img, point2d(400, 200, 0x0000ff00), point2d(400, 200 + 100, 0x0000ff00));
-		draw_line(img, point2d(400, 200, 0x0000ff00), point2d(400, 200 - 100, 0x0000ff00));
-		draw_line(img, point2d(400, 200, 0x0000ff00), point2d(400 + 100, 200, 0x0000ff00));
-		draw_line(img, point2d(400, 200, 0x0000ff00), point2d(400 - 100, 200, 0x0000ff00));
+		draw_line(img, pixel(400, 200, 0x0000ff00), pixel(400, 200 + 100, 0x0000ff00));
+		draw_line(img, pixel(400, 200, 0x0000ff00), pixel(400, 200 - 100, 0x0000ff00));
+		draw_line(img, pixel(400, 200, 0x0000ff00), pixel(400 + 100, 200, 0x0000ff00));
+		draw_line(img, pixel(400, 200, 0x0000ff00), pixel(400 - 100, 200, 0x0000ff00));
 
 		//ligne diagonale
-		draw_line(img, point2d(400, 200, 0x0000ff00), point2d(400 + 100, 200 - 100, 0x0000ff00));
-		draw_line(img, point2d(400, 200, 0x0000ff00), point2d(400 + 100, 200 + 100, 0x0000ff00));
-		draw_line(img, point2d(400, 200, 0x0000ff00), point2d(400 - 100, 200 + 100, 0x0000ff00));
-		draw_line(img, point2d(400, 200, 0x0000ff00), point2d(400 - 100, 200 - 100, 0x0000ff00));
+		draw_line(img, pixel(400, 200, 0x0000ff00), pixel(400 + 100, 200 - 100, 0x0000ff00));
+		draw_line(img, pixel(400, 200, 0x0000ff00), pixel(400 + 100, 200 + 100, 0x0000ff00));
+		draw_line(img, pixel(400, 200, 0x0000ff00), pixel(400 - 100, 200 + 100, 0x0000ff00));
+		draw_line(img, pixel(400, 200, 0x0000ff00), pixel(400 - 100, 200 - 100, 0x0000ff00));
 }

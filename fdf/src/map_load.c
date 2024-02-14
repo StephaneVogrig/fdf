@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   map_load.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 15:46:08 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/13 07:01:12 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/14 04:02:02 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ t_data	*file_line_to_data(char *str, int nbr_col)
 	t_data	*new_data_line;
 	int		col;
 	int		sign;
-
 	new_data_line = malloc(sizeof(t_data) * nbr_col);
 	if (!new_data_line)
 		return (NULL);
@@ -31,7 +30,7 @@ t_data	*file_line_to_data(char *str, int nbr_col)
 			new_data_line[col].color = hexatoi_offset(&str);
 		}
 		else
-			new_data_line[col].color = 0x00FFFFFF;
+			new_data_line[col].color = ARGB_WHITE;
 		if (*str == '\n')
 			str++;
 		col++;
@@ -118,7 +117,7 @@ t_bool	map_load(char *path, t_map *map)
 	map->datas = map_list_to_tab(map_list, map->nbr_line);
 	if (!map->datas)
 		return (error_perror("map_load:map_list_to_tab"));
-	map->buffer = malloc(sizeof(t_point2d) * map->nbr_col);
+	map->buffer = malloc(sizeof(t_pixel) * map->nbr_col);
 	if (!map->buffer)
 		return (error_perror("map_load:malloc"));
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:43:41 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/13 07:19:41 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/14 01:08:17 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_vec2f	projection_f(t_float32 x, t_float32 y, t_float32 z, t_transform *t)
 t_bound2i	bounding_box_projection(t_map *map, t_transform *transform)
 {
 	t_bound2i	bb;
-	t_point2d	current;
+	t_pixel		current;
 	t_vec2i		i;
 
 	current = projection(0, 0, map->datas[0][0], transform);
