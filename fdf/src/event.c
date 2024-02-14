@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 03:07:35 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/14 05:17:33 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/14 10:51:33 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@ int	on_key_press(int keycode, t_fdf *data)
 	if (keycode == 65307)
 		mlx_loop_end(data->mlx);
 	else if (keycode == 111)
-		draw_line(data->img, pixel(100, 100, 0x00ff0000), pixel(110, 300, 0x00ff0000));
-
+	{
+		draw_line(data->img, pixel(100, 100, 0x00FFFF00), pixel(300, 100, 0x000000FF));
+		draw_line(data->img, pixel(100, 100, 0x00FFFF00), pixel(100, 300, 0x000000FF));
+		draw_line(data->img, pixel(100, 100, 0x00FFFF00), pixel(300, 300, 0x000000FF));
+		data->map.is_update = TRUE;
+	}
 	printf("key pressed: %d\n", keycode);
 	return (0);
 }
@@ -26,6 +30,11 @@ int	on_key_press(int keycode, t_fdf *data)
 int	on_mouse_move(int x, int y, t_fdf *data)
 {
 	if (data->left_button_is_press)
+	{
+		draw_sqare(data->img, x, y, 0x00FF0000);
+		data->map.is_update = TRUE;
+	}
+	if (data->right_button_is_press)
 	{
 		draw_sqare(data->img, x, y, 0x00FF0000);
 		data->map.is_update = TRUE;

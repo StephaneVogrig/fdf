@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 18:47:29 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/13 19:50:43 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/14 12:51:55 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	color_gradient_test(t_img *img)
 		current.x = start.x;
 		while (current.x <= end.x)
 		{
-			current.color = color_gradient(start, end, 
+			// current.color = color_gradient(start, end, 
 			current.x++;
 		}
 		current.y++;

@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:03:51 by stephane          #+#    #+#             */
-/*   Updated: 2024/02/14 04:48:28 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/14 12:51:23 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@
 # include "pixel.h"
 # include "color.h"
 
+// test
+# include <time.h>
+
 # define FDF_BUFFER_SIZE 10
 # define WINDOW_WIDTH 1600
-# define WINDOW_HIGTH 800
+# define WINDOW_HIGTH 900
 
 # define DESTROY_NOTIFY 17
 # define MOUSE_RIGHT 3
@@ -90,6 +93,7 @@ void		draw_line(t_img *img, t_pixel a, t_pixel b);
 /* bresenham -----------------------------------------------------------------*/
 void		draw_line_bresenham_y(t_img *img, t_pixel a, t_pixel b, t_vec2i d);
 void		draw_line_bresenham_x(t_img *img, t_pixel a, t_pixel b, t_vec2i d);
+void		bresenham(t_img *img, t_pixel a, t_pixel b, t_vec2i abs_d);
 
 /* event ---------------------------------------------------------------------*/
 int			on_key_press(int keycode, t_fdf *data);

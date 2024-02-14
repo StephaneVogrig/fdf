@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 07:21:44 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/14 01:04:35 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/14 12:52:49 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void	draw_line_bresenham_x(t_img *img, t_pixel a, t_pixel b, t_vec2i d)
 {
-	int	i;
-	int	err;
+	int			i;
+	int			err;
+	t_gradiant	gradiant;
 
+	gradiant = color_gradiant(a.color, b.color, d);
 	if (a.y > b.y)
 		i = -1;
 	else
@@ -33,6 +35,8 @@ void	draw_line_bresenham_x(t_img *img, t_pixel a, t_pixel b, t_vec2i d)
 			a.y += i;
 			err -= d.x;
 		}
+		if (a.color != b.color)
+			a.color = color_gradiant_add(&gradiant);
 		img_set_pixel(img, a.x, a.y, a.color);
 	}
 }
@@ -41,7 +45,9 @@ void	draw_line_bresenham_y(t_img *img, t_pixel a, t_pixel b, t_vec2i d)
 {
 	int	i;
 	int	err;
+	t_gradiant	gradiant;
 
+	gradiant = color_gradiant(a.color, b.color, d);
 	if (a.x > b.x)
 		i = -1;
 	else
@@ -58,6 +64,8 @@ void	draw_line_bresenham_y(t_img *img, t_pixel a, t_pixel b, t_vec2i d)
 			a.x += i;
 			err -= d.y;
 		}
+		if (a.color != b.color)
+			a.color = color_gradiant_add(&gradiant);
 		img_set_pixel(img, a.x, a.y, a.color);
 	}
 }
@@ -73,7 +81,10 @@ inline void	bresenham_2(t_img *img, t_pixel a, t_pixel b, t_bresenham var)
 {
 	int	err;
 	int	e2;
+	t_gradiant	gradiant;
 
+	// gradiant = color_gradiant(a.color, b.color, vector2i(var.dx, var.dy));
+	gradiant = color_gradiant(a.color, b.color, vector2i_sub(b.vec2i, a.vec2i));
 	err = var.dx + var.dy;
 	while (a.x != b.x || a.y != b.y)
 	{
@@ -83,21 +94,24 @@ inline void	bresenham_2(t_img *img, t_pixel a, t_pixel b, t_bresenham var)
 			err += var.dy;
 			a.x += var.sx;
 		}
-		if (e2 <= var.dx)
+		else if (e2 <= var.dx)
 		{
 			err += var.dx;
 			a.y += var.sy;
 		}
+		if (a.color != b.color)
+			a.color = color_gradiant_add(&gradiant);
 		img_set_pixel(img, a.x, a.y, a.color);
 	}
 }
 
-void	bresenham(t_img *img, t_pixel a, t_pixel b)
+inline void	bresenham(t_img *img, t_pixel a, t_pixel b, t_vec2i abs_d)
 {
 	t_bresenham	var;
 
-	var.dx = ft_abs(b.x - a.x);
-	var.dy = -ft_abs(b.y - a.y);
+	var.dx = abs_d.x;
+	var.dy = -abs_d.y;
+
 	if (a.x < b.x)
 		var.sx = 1;
 	else

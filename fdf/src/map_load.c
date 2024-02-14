@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 15:46:08 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/14 04:02:02 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/14 12:50:29 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_data	*file_line_to_data(char *str, int nbr_col)
 	t_data	*new_data_line;
 	int		col;
 	int		sign;
+
 	new_data_line = malloc(sizeof(t_data) * nbr_col);
 	if (!new_data_line)
 		return (NULL);

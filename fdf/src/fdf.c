@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:15:40 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/14 05:08:42 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/14 12:49:14 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	fdf_init(t_fdf *fdf_var)
 	fdf_var->img = NULL;
 	fdf_var->left_button_is_press = 0;
 	fdf_var->right_button_is_press = 0;
-	fdf_var->last_mouse_pos = vector2i(0,0);
+	fdf_var->last_mouse_pos = vector2i(0, 0);
 	fdf_var->map.nbr_line = 0;
 	fdf_var->map.nbr_col = 0;
 	fdf_var->map.datas = NULL;
