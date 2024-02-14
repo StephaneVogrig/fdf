@@ -6,20 +6,20 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:43:41 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/14 01:08:17 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/14 13:31:08 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_float32	scale(int width_map, int high_map, int width_img, int high_img)
+t_float32	scale(float width_map, float high_map, int width_img, int high_img)
 {
-	t_float32	scale_x;
-	t_float32	scale_y;
+	float	scale_x;
+	float	scale_y;
 
 // ft_printf("width map:%i, img:%i - high map:%i, img:%i\n", width_map, width_img, high_map, high_img);
-	scale_x = (t_float32)width_img / (t_float32)(width_map);
-	scale_y = (t_float32)high_img / (t_float32)(high_map);
+	scale_x = (float)width_img / (width_map);
+	scale_y = (float)high_img / (high_map);
 // ft_printf("scale x:%.20f, y:%.20f\n", scale_x, scale_y);
 	if (scale_x < scale_y)
 		return (scale_x);
@@ -28,25 +28,25 @@ t_float32	scale(int width_map, int high_map, int width_img, int high_img)
 
 // ft_printf("bbmin x:%i, y:%i - bbmax x:%i, y:%i\n", bb.min.x, bb.min.y, bb.max.x, bb.max.y);
 
-t_vec2f	projection_f(t_float32 x, t_float32 y, t_float32 z, t_transform *t)
+t_vec2f	projection_f(float x, float y, t_data data, t_transform *t)
 {
 	t_vec2f	point;
 
-	point.x = t->dx + t->scale * (t->a1 * x + t->a2 * y + t->a3 * z);
-	point.y = t->dy + t->scale * (t->b1 * x + t->b2 * y + t->b3 * z);
+	point.x = t->dx + t->scale * (t->a1 * x + t->a2 * y + t->a3 * data.z);
+	point.y = t->dy + t->scale * (t->b1 * x + t->b2 * y + t->b3 * data.z);
 	return (point);
 }
 
 
-t_bound2i	bounding_box_projection(t_map *map, t_transform *transform)
+t_bound	bounding_box_projection(t_map *map, t_transform *transform)
 {
-	t_bound2i	bb;
-	t_pixel		current;
+	t_bound	bb;
+	t_vec2f		current;
 	t_vec2i		i;
 
-	current = projection(0, 0, map->datas[0][0], transform);
+	current = projection_f(0, 0, map->datas[0][0], transform);
 // printf("current x:%i\n", current.x);
-	bb.min = current.vec2i;
+	bb.min = current;
 	bb.max = bb.min;
 	i.y = -1;
 	while (++i.y < map->nbr_line)
@@ -56,7 +56,7 @@ t_bound2i	bounding_box_projection(t_map *map, t_transform *transform)
 		{
 
 // ft_printf("bbmin x:%i, y:%i - bbmax x:%i, y:%i\n", bb.min.x, bb.min.y, bb.max.x, bb.max.y);
-			current = projection(i.x, i.y, map->datas[i.y][i.x], transform);
+			current = projection_f(i.x, i.y, map->datas[i.y][i.x], transform);
 			if (current.x < bb.min.x)
 				bb.min.x = current.x;
 			if (current.y < bb.min.y)
@@ -74,8 +74,8 @@ t_bound2i	bounding_box_projection(t_map *map, t_transform *transform)
 t_transform	transform_init(t_map *map, t_img *img)
 {
 	t_transform	transform;
-	t_bound2i	bb;
-	t_vec2i		dim_bb;
+	t_bound	bb;
+	t_vec2f		dim_bb;
 	t_vec2f		dim_proj;
 	t_vec2f		center_proj;
 
@@ -92,11 +92,11 @@ t_transform	transform_init(t_map *map, t_img *img)
 
 	bb = bounding_box_projection(map, &transform);
 ft_printf("bounding box min x:%i, y:%i - max x:%i, y:%i\n", bb.min.x, bb.min.y, bb.max.x, bb.max.y);
-	dim_bb = vector2i_sub(bb.max, bb.min);	
+	dim_bb = vector2f_sub(bb.max, bb.min);	
 
 ft_printf("dim x:%i, y:%i\n", dim_bb.x, dim_bb.y);
 
-	transform.scale = scale(dim_bb.x, dim_bb.y, img->width, img->height) * 1;
+	transform.scale = scale(dim_bb.x, dim_bb.y, img->width, img->height) * 0.9;
 ft_printf("scale:%f\n", transform.scale);
 
 	// transform.dx = (dim_bb.x / 2) * transform.scale;

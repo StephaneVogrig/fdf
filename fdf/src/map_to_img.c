@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 05:29:54 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/14 12:34:53 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/14 12:58:33 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	map_to_img(t_map *map, t_img *img, t_transform *transform)
 	map_draw_img(img, map, transform);
 	map_draw_buffer(img, map->buffer, map->nbr_col);
 	map->is_update = TRUE;
+
+
 	clock_t end = clock();
     // unsigned long millis = (end -  begin) * 1000 / CLOCKS_PER_SEC;
     // printf( "Finished in %ld ms\n", millis ); 

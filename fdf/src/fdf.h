@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:03:51 by stephane          #+#    #+#             */
-/*   Updated: 2024/02/14 12:51:23 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/14 13:14:02 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ typedef struct s_fdf{
 	t_vec2i		last_mouse_pos;
 }	t_fdf;
 
-typedef struct s_bounding2d_int{
-	t_vec2i	min;
-	t_vec2i	max;
-}	t_bound2i;
+typedef struct s_bounding{
+	t_vec2f	min;
+	t_vec2f	max;
+}	t_bound;
 
-t_bound2i	bounding_box_2d(t_map *map, t_transform *transform);
+t_bound	bounding_box_2d(t_map *map, t_transform *transform);
 
 /* draw-line ----------------------------------------------------------------*/
 void		draw_line(t_img *img, t_pixel a, t_pixel b);
