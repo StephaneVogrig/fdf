@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:03:51 by stephane          #+#    #+#             */
-/*   Updated: 2024/02/14 17:24:47 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/15 12:20:31 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ typedef struct s_bounding{
 	t_vec2f	max;
 }	t_bound;
 
-t_bound	bounding_box_2d(t_map *map, t_transform *transform);
+t_bound		bounding_box_2d(t_map *map, t_transform *transform);
 
 /* draw-line ----------------------------------------------------------------*/
 void		draw_line(t_img *img, t_pixel a, t_pixel b);
@@ -140,6 +140,10 @@ t_bool		mlx_setup(t_fdf *data);
 
 /* point2d -------------------------------------------------------------------*/
 t_pixel		pixel(int x, int y, t_ui32 color);
+
+/* projection ----------------------------------------------------------------*/
+void		projection_iso(t_transform *transform);
+void		projection_plane(t_transform *transform);
 
 /* render --------------------------------------------------------------------*/
 int			render(t_fdf *data);
