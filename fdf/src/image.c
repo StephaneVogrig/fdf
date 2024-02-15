@@ -6,13 +6,13 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 03:23:17 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/14 05:21:49 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/14 16:06:04 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	img_clear(t_map *map, t_img *img, t_transform *transform)
+void	img_clear(t_map *map, t_img *img)
 {
 	int	x;
 	int	y;

@@ -6,7 +6,7 @@
 #    By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/03 19:41:13 by stephane          #+#    #+#              #
-#    Updated: 2024/02/14 04:10:53 by svogrig          ###   ########.fr        #
+#    Updated: 2024/02/14 15:45:01 by svogrig          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC			:=	main.c \
 				fdf.c \
 				image.c \
 				map_load.c \
+				map_move.c \
 				map_to_img.c \
 				mlx.c \
 				pixel.c \
