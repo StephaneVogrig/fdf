@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:03:51 by stephane          #+#    #+#             */
-/*   Updated: 2024/02/15 12:20:31 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/16 14:53:13 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,16 @@
 # define MOUSE_MOVE 6
 
 # define KEYBOARD 2
+# define KEY_ESC 65307
 # define KEY_LEFT_ARROW 65361
 # define KEY_UP_ARROW 65362
 # define KEY_RIGHT_ARROW 65363
 # define KEY_DOWN_ARROW 65364
+
+# define NUMPAD_KEY_4 65430
+# define NUMPAD_KEY_8 65431
+# define NUMPAD_KEY_6 65432
+# define NUMPAD_KEY_2 65433
 
 # define MOVE_STEP 10
 # define ARGB_WHITE 0x00ffffff
@@ -65,15 +71,21 @@ typedef struct s_map{
 }	t_map;
 
 typedef struct s_transform{
-	t_float64	scale;
-	int			dx;
-	int			dy;
-	float		a1;
-	float		a2;
-	float		a3;
-	float		b1;
-	float		b2;
-	float		b3;
+	t_vec2f	offset_map;
+	t_vec3f	rot;
+	float	scale;
+	int		dx;
+	int		dy;
+	float	a1;
+	float	a2;
+	float	a3;
+	float	b1;
+	float	b2;
+	float	b3;
+	float	c1;
+	float	c2;
+	float	c3;
+	float	scale_z;
 }	t_transform;
 
 typedef struct s_fdf{
@@ -88,7 +100,7 @@ typedef struct s_fdf{
 		t_ui8	key_move_is_pressed : 1;
 	};
 	t_ui32		keycode;
-	t_vec2i		last_mouse_pos;
+	t_vec2i		mouse_origin;
 }	t_fdf;
 
 typedef struct s_bounding{
@@ -134,6 +146,8 @@ t_pixel		projection(int x, int y, t_data data, t_transform *t);
 t_bool		map_load(char *path, t_map *map);
 void		map_move_keyboard(t_fdf *fdf, int keycode);
 void		map_move_mouse(t_fdf *fdf, int keycode);
+void		map_rot_x_keyboard(t_fdf *fdf, int keycode);
+void		map_rot_z_keyboard(t_fdf *fdf, int keycode);
 
 /* mlx -----------------------------------------------------------------------*/
 t_bool		mlx_setup(t_fdf *data);
@@ -144,12 +158,13 @@ t_pixel		pixel(int x, int y, t_ui32 color);
 /* projection ----------------------------------------------------------------*/
 void		projection_iso(t_transform *transform);
 void		projection_plane(t_transform *transform);
+void		projection_gen(t_transform *transform, t_vec3f rot);
 
 /* render --------------------------------------------------------------------*/
 int			render(t_fdf *data);
 
 /* transform -----------------------------------------------------------------*/
-t_transform	transform_init(t_map *map, t_img *img);
+void		transform_init(t_transform *transform, t_map *map, t_img *img);
 
 /* window --------------------------------------------------------------------*/
 int			window_close(void *mlx);

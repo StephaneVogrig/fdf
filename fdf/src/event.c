@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 03:07:35 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/14 17:12:24 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/16 14:53:35 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	on_key_press(int keycode, t_fdf *fdf)
 {
-	if (keycode == 65307)
+	if (keycode == KEY_ESC)
 		mlx_loop_end(fdf->mlx);
 	else if (keycode == 111)
 	{
@@ -27,16 +27,33 @@ int	on_key_press(int keycode, t_fdf *fdf)
 		map_move_keyboard(fdf, keycode);
 	else if (keycode == KEY_RIGHT_ARROW || keycode == KEY_DOWN_ARROW)
 		map_move_keyboard(fdf, keycode);
+	else if (keycode == NUMPAD_KEY_4 || keycode == NUMPAD_KEY_6)
+		map_rot_z_keyboard(fdf, keycode);
+	else if (keycode == NUMPAD_KEY_8 || keycode == NUMPAD_KEY_2)
+		map_rot_x_keyboard(fdf, keycode);
 	printf("key pressed: %d\n", keycode);
 	return (0);
 }
 
 int	on_mouse_move(int x, int y, t_fdf *fdf)
 {
+	int dx;
+	int dy;
+
 	if (fdf->left_button_is_press)
 	{
-		draw_sqare(fdf->img, x, y, 0x00FF0000);
-		fdf->map.is_update = TRUE;
+// 		dx = x - fdf->mouse_origin.x;
+// 		dy = y - fdf->mouse_origin.y;
+// 		fdf->transform.dx += dx;
+// 		fdf->transform.dy += dy;
+		
+// // ft_printf("dx:%i dy:%i\n", dx, dy);
+// 		fdf->mouse_origin.x = x;
+// 		fdf->mouse_origin.y = y;
+// 		img_clear(&fdf->map, fdf->img);
+// 		map_to_img(&fdf->map, fdf->img, &fdf->transform);
+// 		// draw_sqare(fdf->img, x, y, 0x00FF0000);
+// 		fdf->map.is_update = TRUE;
 	}
 	if (fdf->right_button_is_press)
 	{
@@ -49,7 +66,10 @@ int	on_mouse_move(int x, int y, t_fdf *fdf)
 int	on_mouse_press(int button, int x, int y, t_fdf	*fdf)
 {
 	if (button == MOUSE_LEFT)
+	{
+		fdf->mouse_origin = vector2i(x, y);
 		fdf->left_button_is_press = TRUE;
+	}
 	if (button == MOUSE_RIGHT)
 		fdf->right_button_is_press = TRUE;
 		// draw_sqare(fdf->img, x, y, 0x000000FF);
@@ -61,7 +81,13 @@ int	on_mouse_release(int button, int x, int y, t_fdf *fdf)
 	if ( button == MOUSE_RIGHT)
 		fdf->right_button_is_press = FALSE;
 	if (button == MOUSE_LEFT)
+	{
+		fdf->transform.dx += x - fdf->mouse_origin.x;
+		fdf->transform.dy += y - fdf->mouse_origin.y;
+		img_clear(&fdf->map, fdf->img);
+		map_to_img(&fdf->map, fdf->img, &fdf->transform);
 		fdf->left_button_is_press = FALSE;
+	}
 	if (button == MOUSE_MIDLE)
 		img_clean(&fdf->map, fdf->img, &fdf->transform);
 	if (button == MOUSE_ROLLUP)

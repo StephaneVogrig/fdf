@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:43:41 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/15 12:18:12 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/16 14:45:04 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_vec2f	projection_f(float x, float y, t_data data, t_transform *t)
 {
 	t_vec2f	point;
 
+	x += t->offset_map.x;
+	y += t->offset_map.y;
 	point.x = t->dx + t->scale * (t->a1 * x + t->a2 * y + t->a3 * data.z);
 	point.y = t->dy + t->scale * (t->b1 * x + t->b2 * y + t->b3 * data.z);
 	return (point);
@@ -69,27 +71,30 @@ t_bound	bounding_box_projection(t_map *map, t_transform *transform)
 // ft_printf("bbmin x:%i, y:%i - bbmax x:%i, y:%i\n", bb.min.x, bb.min.y, bb.max.x, bb.max.y);
 // ft_printf("bbmin x:%i, y:%i - bbmax x:%i, y:%i\n", bb.min.x, bb.min.y, bb.max.x, bb.max.y);
 	
-t_transform	transform_init(t_map *map, t_img *img)
+void	transform_init(t_transform *transform, t_map *map, t_img *img)
 {
-	t_transform	transform;
-	t_bound	bb;
+	t_bound		bb;
 	t_vec2f		dim_bb;
 	t_vec2f		dim_proj;
 	t_vec2f		center_proj;
 
-	// projection_iso(&transform);
-	projection_plane(&transform);
-	transform.scale = 1;
-	bb = bounding_box_projection(map, &transform);
+	transform->offset_map.x = -map->nbr_col / 2;
+	transform->offset_map.y = -map->nbr_line / 2;
+	// projection_iso(transform);
+	transform->rot = vector3f(75.0, 0.0, 45.0);
+	projection_gen(transform, transform->rot);
+	// projection_plane(transform);
+	transform->scale = 1;
+	transform->scale_z = 1;
+	bb = bounding_box_projection(map, transform);
 	dim_bb = vector2f_sub(bb.max, bb.min);
-	transform.scale = scale(dim_bb.x, dim_bb.y, img->width, img->height) * 0.9;
-	bb.min.x *= transform.scale;
-	bb.min.y *= transform.scale;
-	bb.max.x *= transform.scale;
-	bb.max.y *= transform.scale;
-	transform.dx = (WINDOW_WIDTH - bb.max.x - bb.min.x) / 2;
-	transform.dy = (WINDOW_HIGTH - bb.max.y - bb.min.y) / 2;
-	return (transform);
+	transform->scale = scale(dim_bb.x, dim_bb.y, img->width, img->height) * 0.9;
+	bb.min.x *= transform->scale;
+	bb.min.y *= transform->scale;
+	bb.max.x *= transform->scale;
+	bb.max.y *= transform->scale;
+	transform->dx = (WINDOW_WIDTH - bb.max.x - bb.min.x) / 2;
+	transform->dy = (WINDOW_HIGTH - bb.max.y - bb.min.y) / 2;
 }
 
 // ft_printf("bounding box min x:%i, y:%i - max x:%i, y:%i\n", bb.min.x, bb.min.y, bb.max.x, bb.max.y);

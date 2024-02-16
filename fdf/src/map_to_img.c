@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 05:29:54 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/14 12:58:33 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/16 13:56:14 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,29 @@
 t_pixel	projection(int x, int y, t_data data, t_transform *t)
 {
 	t_pixel	pixel;
+	float	z;
+	float	pixel_z;
 
-	pixel.x = t->dx + t->scale * (t->a1 * x + t->a2 * y + t->a3 * data.z);
-	pixel.y = t->dy + t->scale * (t->b1 * x + t->b2 * y + t->b3 * data.z);
+	x += t->offset_map.x;
+	y += t->offset_map.y;
+	// z = data.z * t->scale_z;
+	z = data.z * 0.1;
+	
+	// z = data.z;
+	
+	pixel.x = t->dx + t->scale * (t->a1 * x + t->a2 * y + t->a3 * z);
+	pixel.y = t->dy + t->scale * (t->b1 * x + t->b2 * y + t->b3 * z);
+	pixel_z	= t->scale * (t->c1 * x + t->c2 * y + t->c3 * z);
+
+
+// ft_printf("c1:%i\n", pixel.x);
+// ft_printf("z map:%i z proj:%f z pixel:%i\n",data.z, z, pixel_z);
+// printf("z map:%i z proj:%f z pixel:%f\n", data.z, z, );
+	// if (pixel_z > 0)
+	// {
+	// pixel.x = pixel.x / (1 + pixel_z * 2);
+	// pixel.y = pixel.y / (1 + pixel_z * 2);
+	// }
 	pixel.color = data.color;
 	return (pixel);
 }
@@ -85,7 +105,6 @@ void	map_to_img(t_map *map, t_img *img, t_transform *transform)
 	map_draw_img(img, map, transform);
 	map_draw_buffer(img, map->buffer, map->nbr_col);
 	map->is_update = TRUE;
-
 
 	clock_t end = clock();
     // unsigned long millis = (end -  begin) * 1000 / CLOCKS_PER_SEC;
