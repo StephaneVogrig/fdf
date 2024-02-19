@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stephane <stephane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:07:16 by stephane          #+#    #+#             */
-/*   Updated: 2024/02/16 02:35:03 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/17 19:53:20 by stephane         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "fdf.h"
 
@@ -20,19 +20,19 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (0);
-	ft_bzero(&fdf, sizeof(fdf));
-	// fdf_init(&fdf);
-ft_printf("scale z:%f\n", fdf.transform.scale_z);
+	fdf_init(&fdf);
+// ft_printf("scale z:%f\n", fdf.transform.scale_z);
 	ok = map_load(argv[1], &fdf.map);
 	if (ok)
 		ok = mlx_setup(&fdf);
-	if (ok)
+	if (ok) 
 	{
 		// mlx_do_key_autorepeaton(fdf.mlx);
 		transform_init(&fdf.transform, &fdf.map, fdf.img);
-ft_printf("scale z:%f\n", fdf.transform.scale_z);
+// ft_printf("scale z:%f\n", fdf.transform.scale_z);
 		event_setup(&fdf);
-		map_to_img(&fdf.map, fdf.img, &fdf.transform);
+		render(&fdf);
+		// map_to_img(&fdf.map, fdf.img, &fdf.transform);
 		mlx_loop(fdf.mlx);
 	}
 	fdf_clean(&fdf);

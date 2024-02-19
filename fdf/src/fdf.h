@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stephane <stephane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:03:51 by stephane          #+#    #+#             */
-/*   Updated: 2024/02/16 14:53:13 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/18 20:30:09 by stephane         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef FDF_H
 # define FDF_H
@@ -30,28 +30,34 @@
 # define DESTROY_NOTIFY 17
 
 # define MOUSE 1
+# define MOUSE_BUTTON_PRESS 4
+# define MOUSE_BUTTON_RELEASE 5
+# define MOUSE_MOVE 6
+
 # define MOUSE_RIGHT 3
 # define MOUSE_LEFT 1
 # define MOUSE_MIDLE 2
 # define MOUSE_ROLLUP 5
 # define MOUSE_ROLLDOWN 4
-# define MOUSE_BUTTON_PRESS 4
-# define MOUSE_BUTTON_RELEASE 5
-# define MOUSE_MOVE 6
 
 # define KEYBOARD 2
+# define ON_KEY_PRESS 2
+# define ON_KEY_RELEASE 3
+
 # define KEY_ESC 65307
 # define KEY_LEFT_ARROW 65361
 # define KEY_UP_ARROW 65362
 # define KEY_RIGHT_ARROW 65363
 # define KEY_DOWN_ARROW 65364
+# define KEY_PGUP 65365
+# define KEY_PGDOWN 65366
 
 # define NUMPAD_KEY_4 65430
 # define NUMPAD_KEY_8 65431
 # define NUMPAD_KEY_6 65432
 # define NUMPAD_KEY_2 65433
 
-# define MOVE_STEP 10
+# define MOVE_STEP 5
 # define ARGB_WHITE 0x00ffffff
 # define ARGB_RED 0x00ff0000
 # define ARGB_BLUE 0x0000ff00
@@ -92,14 +98,14 @@ typedef struct s_fdf{
 	void		*mlx;
 	void		*win;
 	t_img		*img;
+	t_img		*img2;
 	t_map		map;
 	t_transform	transform;
 	struct{
 		t_ui8	left_button_is_press : 1;
 		t_ui8	right_button_is_press : 1;
-		t_ui8	key_move_is_pressed : 1;
 	};
-	t_ui32		keycode;
+	t_ui64		key_pressed;
 	t_vec2i		mouse_origin;
 }	t_fdf;
 
@@ -119,18 +125,18 @@ void		draw_line_bresenham_x(t_img *img, t_pixel a, t_pixel b, t_vec2i d);
 void		bresenham(t_img *img, t_pixel a, t_pixel b, t_vec2i abs_d);
 
 /* event ---------------------------------------------------------------------*/
-int			on_key_press(int keycode, t_fdf *data);
-int			on_mouse_move(int x, int y, t_fdf *data);
+int			on_key_press(int keycode, t_fdf *fdf);
+int			on_mouse_move(int x, int y, t_fdf *fdf);
 int			on_mouse_press(int button, int x, int y, t_fdf	*data);
-int			on_mouse_release(int button, int x, int y, t_fdf *data);
-void		event_setup(t_fdf *data);
+int			on_mouse_release(int button, int x, int y, t_fdf *fdf);
+void		event_setup(t_fdf *fdf);
 
 /* exit ----------------------*-----------------------------------------------*/
-void		exit_on_error(char *msg, t_fdf *data);
-void		exit_fdf(t_fdf *data);
+void		exit_on_error(char *msg, t_fdf *fdf);
+void		exit_fdf(t_fdf *fdf);
 
 /* fdf -----------------------------------------------------------------------*/
-void		fdf_init(t_fdf *fdf_var);
+void		fdf_init(t_fdf *fdf);
 void		fdf_clean(t_fdf *fdf);
 
 /* image ---------------------------------------------------------------------*/
@@ -148,9 +154,10 @@ void		map_move_keyboard(t_fdf *fdf, int keycode);
 void		map_move_mouse(t_fdf *fdf, int keycode);
 void		map_rot_x_keyboard(t_fdf *fdf, int keycode);
 void		map_rot_z_keyboard(t_fdf *fdf, int keycode);
+void		map_scale_z(t_fdf *fdf, int keycode);
 
 /* mlx -----------------------------------------------------------------------*/
-t_bool		mlx_setup(t_fdf *data);
+t_bool		mlx_setup(t_fdf *fdf);
 
 /* point2d -------------------------------------------------------------------*/
 t_pixel		pixel(int x, int y, t_ui32 color);
@@ -161,7 +168,7 @@ void		projection_plane(t_transform *transform);
 void		projection_gen(t_transform *transform, t_vec3f rot);
 
 /* render --------------------------------------------------------------------*/
-int			render(t_fdf *data);
+int			render(t_fdf *fdf);
 
 /* transform -----------------------------------------------------------------*/
 void		transform_init(t_transform *transform, t_map *map, t_img *img);
@@ -170,8 +177,8 @@ void		transform_init(t_transform *transform, t_map *map, t_img *img);
 int			window_close(void *mlx);
 
 /* window --------------------------------------------------------------------*/
-void		zoom_increase(t_map *map, t_img *img, t_transform *transform);
-void		zoom_decrease(t_map *map, t_img *img, t_transform *transform);
+void		zoom_increase(t_fdf *fdf, int x, int y);
+void		zoom_decrease(t_fdf *fdf);
 
 # include "debug.h"
 

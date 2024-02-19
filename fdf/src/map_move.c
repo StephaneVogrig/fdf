@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   map_move.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stephane <stephane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 05:15:59 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/16 14:50:29 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/18 20:13:04 by stephane         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "fdf.h"
 
@@ -35,8 +35,9 @@ inline void	map_move_keyboard(t_fdf *fdf, int keycode)
 	
 	fdf->transform.dx += move.x;
 	fdf->transform.dy += move.y;
-	img_clear(&fdf->map, fdf->img);
-	map_to_img(&fdf->map, fdf->img, &fdf->transform);
+	// img_clear(&fdf->map, fdf->img);
+	// map_to_img(&fdf->map, fdf->img, &fdf->transform);
+	render(fdf);
 	fdf->map.is_update = TRUE;
 }
 
@@ -44,14 +45,16 @@ void	map_rot_z_keyboard(t_fdf *fdf, int keycode)
 {
 // ft_printf("avant rot z:%f\n", fdf->transform.rot.z);
 	if (keycode == NUMPAD_KEY_4)
-		fdf->transform.rot.z += 1;
+		fdf->transform.rot.z += 0.5;
 	else if (keycode == NUMPAD_KEY_6)
-		fdf->transform.rot.z -= 1;
-	img_clear(&fdf->map, fdf->img);
+		fdf->transform.rot.z -= 0.5;
 	projection_gen(&fdf->transform, fdf->transform.rot);
-	map_to_img(&fdf->map, fdf->img, &fdf->transform);
+	// img_clear(&fdf->map, fdf->img);
+	// map_to_img(&fdf->map, fdf->img, &fdf->transform);
+	render(fdf);
 // ft_printf("apres rot z:%f\n", fdf->transform.rot.z);
 	fdf->map.is_update = TRUE;
+	// mlx_flush_event(fdf->mlx);
 
 }
 
@@ -62,10 +65,21 @@ void	map_rot_x_keyboard(t_fdf *fdf, int keycode)
 		fdf->transform.rot.x += 1;
 	else if (keycode == NUMPAD_KEY_2)
 		fdf->transform.rot.x -= 1;
-	img_clear(&fdf->map, fdf->img);
 	projection_gen(&fdf->transform, fdf->transform.rot);
-	map_to_img(&fdf->map, fdf->img, &fdf->transform);
+	// img_clear(&fdf->map, fdf->img);
+	// map_to_img(&fdf->map, fdf->img, &fdf->transform);
+	render(fdf);
 // ft_printf("apres rot z:%f\n", fdf->transform.rot.z);
 	fdf->map.is_update = TRUE;
 
+}
+
+void	map_scale_z(t_fdf *fdf, int keycode)
+{
+	if (keycode == KEY_PGUP)
+		fdf->transform.scale_z += 0.005;
+	if (keycode == KEY_PGDOWN)
+		fdf->transform.scale_z -= 0.005;
+	render(fdf);
+	
 }

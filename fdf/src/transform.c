@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   transform.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stephane <stephane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:43:41 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/16 14:45:04 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/18 21:37:21 by stephane         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "fdf.h"
 
@@ -80,9 +80,9 @@ void	transform_init(t_transform *transform, t_map *map, t_img *img)
 
 	transform->offset_map.x = -map->nbr_col / 2;
 	transform->offset_map.y = -map->nbr_line / 2;
-	// projection_iso(transform);
-	transform->rot = vector3f(75.0, 0.0, 45.0);
-	projection_gen(transform, transform->rot);
+	projection_iso(transform);
+	transform->rot = vector3f(90 - 35.26, 0.0, 45.0);
+	// projection_gen(transform, transform->rot);
 	// projection_plane(transform);
 	transform->scale = 1;
 	transform->scale_z = 1;
