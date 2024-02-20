@@ -6,13 +6,13 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 20:40:54 by stephane          #+#    #+#             */
-/*   Updated: 2024/02/05 11:11:13 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/20 16:11:36 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_si32	si32_min(t_si32 a, t_si32 b)
+inline t_si32	si32_min(t_si32 a, t_si32 b)
 {
 	if (a > b)
 		return (b);
