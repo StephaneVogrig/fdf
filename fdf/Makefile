@@ -6,7 +6,7 @@
 #    By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/03 19:41:13 by stephane          #+#    #+#              #
-#    Updated: 2024/02/16 06:12:33 by svogrig          ###   ########.fr        #
+#    Updated: 2024/02/20 00:22:48 by svogrig          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC			:=	main.c \
 				window.c \
 				zoom.c \
 				color.c \
+				draw_line_efla.c \
 				debug.c
 
 SRC			:=	$(SRC:%=$(DIR_SRC)/%)

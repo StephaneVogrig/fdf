@@ -1,27 +1,27 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stephane <stephane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 03:23:17 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/17 18:57:12 by stephane         ###   ########.fr       */
+/*   Updated: 2024/02/20 00:12:19 by svogrig          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "fdf.h"
 
 void	img_clear(t_map *map, t_img *img)
 {
-	clock_t begin = clock();
+	// clock_t begin = clock();
 	
 	ft_bzero(img->data, img->size_line * img->height);
 
 	map->is_update = TRUE;
 
-	clock_t end = clock();
-    printf( "%-15s in %10ld ticks | %6.3f ms |%6ld fps\n","img_clear", end - begin, 1000.0 * (end - begin) / CLOCKS_PER_SEC , CLOCKS_PER_SEC / (end - begin));
+	// clock_t end = clock();
+    // printf( "%-15s in %10ld ticks | %6.3f ms |%6ld fps\n","img_clear", end - begin, 1000.0 * (end - begin) / CLOCKS_PER_SEC , CLOCKS_PER_SEC / (end - begin));
 }
 
 void	img_clean(t_map *map, t_img *img, t_transform *transform)

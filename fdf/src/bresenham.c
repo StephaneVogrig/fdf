@@ -6,13 +6,13 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 07:21:44 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/14 12:52:49 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/20 16:30:36 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_line_bresenham_x(t_img *img, t_pixel a, t_pixel b, t_vec2i d)
+inline void	draw_line_bresenham_x(t_img *img, t_pixel a, t_pixel b, t_vec2i d)
 {
 	int			i;
 	int			err;
@@ -41,7 +41,7 @@ void	draw_line_bresenham_x(t_img *img, t_pixel a, t_pixel b, t_vec2i d)
 	}
 }
 
-void	draw_line_bresenham_y(t_img *img, t_pixel a, t_pixel b, t_vec2i d)
+inline void	draw_line_bresenham_y(t_img *img, t_pixel a, t_pixel b, t_vec2i d)
 {
 	int	i;
 	int	err;
@@ -83,7 +83,6 @@ inline void	bresenham_2(t_img *img, t_pixel a, t_pixel b, t_bresenham var)
 	int	e2;
 	t_gradiant	gradiant;
 
-	// gradiant = color_gradiant(a.color, b.color, vector2i(var.dx, var.dy));
 	gradiant = color_gradiant(a.color, b.color, vector2i_sub(b.vec2i, a.vec2i));
 	err = var.dx + var.dy;
 	while (a.x != b.x || a.y != b.y)

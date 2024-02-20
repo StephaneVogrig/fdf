@@ -6,30 +6,33 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 03:14:41 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/14 12:03:00 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/20 16:28:44 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_line_hor(t_img *img, t_pixel a, t_pixel b)
+inline void	draw_line_hor(t_img *img, t_pixel a, t_pixel b)
 {
-	int	x;
-	int	end;
+	int			dx;
 	t_gradiant	gradiant;
 
-	x = si32_min(a.x, b.x);
-	end = si32_max(a.x, b.x);
+	if (a.x < b.x)
+		dx = 1;
+	else
+		dx = -1;
+	a.x += dx;
 	gradiant = color_gradiant(a.color, b.color, vector2i_sub(b.vec2i, a.vec2i));
-	while (x <= end)
+	while (a.x != b.x)
 	{
 		if (a.color != b.color)
 			a.color = color_gradiant_add(&gradiant);
-		img_set_pixel(img, x++, a.y, a.color);
+		img_set_pixel(img, a.x, a.y, a.color);
+		a.x += dx;
 	}
 }
 
-void	draw_line_diag(t_img *img, t_pixel a, t_pixel b)
+inline void	draw_line_diag(t_img *img, t_pixel a, t_pixel b)
 {
 	t_vec2i	d;
 	t_gradiant	gradiant;
@@ -43,30 +46,37 @@ void	draw_line_diag(t_img *img, t_pixel a, t_pixel b)
 	else
 		d.y = -1;
 	gradiant = color_gradiant(a.color, b.color, vector2i_sub(b.vec2i, a.vec2i));
+	a.x += d.x;
+	a.y += d.y;
 	while (a.x != b.x)
 	{
-		a.x += d.x;
-		a.y += d.y;
 		if (a.color != b.color)
 			a.color = color_gradiant_add(&gradiant);
 		img_set_pixel(img, a.x, a.y, a.color );
+		a.x += d.x;
+		a.y += d.y;
 	}
 }
 
-void	draw_line_vert(t_img *img, t_pixel a, t_pixel b)
+inline void	draw_line_vert(t_img *img, t_pixel a, t_pixel b)
 {
-	int	y;
-	int	end;
+	int			dy;
 	t_gradiant	gradiant;
 
+	if (a.y == b.y)
+		return ;		
+	if (a.y < b.y)
+		dy = 1;
+	else
+		dy = -1;
+	a.y += dy;
 	gradiant = color_gradiant(a.color, b.color, vector2i_sub(b.vec2i, a.vec2i));
-	y = si32_min(a.y, b.y);
-	end = si32_max(a.y, b.y);
-	while (y <= end)
+	while (a.y != b.y)
 	{
 		if (a.color != b.color)
 			a.color = color_gradiant_add(&gradiant);
-		img_set_pixel(img, a.x, y++, a.color);
+		img_set_pixel(img, a.x, a.y, a.color);
+		a.y += dy;
 	}
 }
 
@@ -92,10 +102,8 @@ void	draw_line_oblique(t_img *img, t_pixel a, t_pixel b, t_vec2i d)
 		else
 			draw_line_bresenham_y(img, b, a, abs_d);
 	}
-	
-	// else
-	// 	bresenham(img, a, b, abs_d);
 }
+
 
 void	draw_line(t_img *img, t_pixel a, t_pixel b)
 {
@@ -106,16 +114,13 @@ void	draw_line(t_img *img, t_pixel a, t_pixel b)
 		return ;
 	if (a.y >= img->height && b.y >= img->height || a.y < 0 && b.y < 0)
 		return ;
-	// ft_printf("ax:%i, ay:%i, bx:%i, by:%i\n", a.x, a.y, b.x, b.y);
-
 	if (a.x == b.x)
 		draw_line_vert(img, a, b);
 	else if (a.y == b.y)
 		draw_line_hor(img, a, b);
 	else
 	{
-	d = vector2i_sub(b.vec2i, a.vec2i);
-	// g_color = color_gradient(a.color, b.color, d);
+		d = vector2i_sub(b.vec2i, a.vec2i);
 		draw_line_oblique(img, a, b, d);
 	}
 }

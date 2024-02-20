@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stephane <stephane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:03:51 by stephane          #+#    #+#             */
-/*   Updated: 2024/02/18 20:30:09 by stephane         ###   ########.fr       */
+/*   Updated: 2024/02/20 00:25:05 by svogrig          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
@@ -180,6 +180,8 @@ int			window_close(void *mlx);
 void		zoom_increase(t_fdf *fdf, int x, int y);
 void		zoom_decrease(t_fdf *fdf);
 
+
+void	myLine(t_img *img, int x, int y, int x2, int y2, t_pixel a, t_pixel b);
 # include "debug.h"
 
 #endif
