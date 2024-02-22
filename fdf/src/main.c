@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:07:16 by stephane          #+#    #+#             */
-/*   Updated: 2024/02/21 02:06:59 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 06:15:19 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int argc, char **argv)
 		return (0);
 	fdf_init(&fdf);
 	ok = map_load(argv[1], &fdf.map);
+	ft_printf("%i\n", ok);
 	if (ok)
 		ok = mlx_setup(&fdf);
 	if (ok)

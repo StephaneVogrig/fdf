@@ -6,7 +6,7 @@
 #    By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/03 19:41:13 by stephane          #+#    #+#              #
-#    Updated: 2024/02/21 21:24:13 by svogrig          ###   ########.fr        #
+#    Updated: 2024/02/22 05:59:09 by svogrig          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,36 +25,36 @@ SRC			:=	main.c \
 				map_load.c \
 				map_to_img.c \
 				transform.c \
-				color.c
+				color_gradient.c
 
 SRC			:=	$(SRC:%=$(DIR_SRC)/%)
 
 # sources bonus ---------------------------------------------------------------#
 
-DIR_BONUS	:=	bonus
-SRC_BONUS	:=	main_bonus.c \
-				bresenham_bonus.c \
-				color_bonus.c \
-				draw_line_bonus.c \
-				event_bonus.c \
-				event_mouse_bonus.c \
-				fdf_bonus.c \
-				image_bonus.c \
-				map_load_bonus.c \
-				map_move_bonus.c \
-				map_to_img_bonus.c \
-				projection_bonus.c \
-				render_bonus.c \
-				transform_bonus.c \
-				zoom_bonus.c
+SRC_BONUS	:=	bresenham.c \
+				color_gradient.c \
+				draw_line.c \
+				image.c \
+				map_load.c \
+				bonus/main_bonus.c \
+				bonus/event_bonus.c \
+				bonus/event_mouse_bonus.c \
+				bonus/fdf_bonus.c \
+				bonus/map_move_bonus.c \
+				bonus/map_to_img_bonus.c \
+				bonus/projection_bonus.c \
+				bonus/render_bonus.c \
+				bonus/transform_bonus.c \
+				bonus/zoom_bonus.c
 
-SRC_BONUS	:=	$(SRC_BONUS:%=$(DIR_SRC)/$(DIR_BONUS)/%)
+SRC_BONUS	:=	$(SRC_BONUS:%=$(DIR_SRC)/%)
 
 # includes --------------------------------------------------------------------#
 
 DIR_INC		:=	/usr/include \
 				mlx_linux \
-				libft/include
+				libft/include \
+				include
 I_FLAG	:=	$(addprefix -I,$(DIR_INC))
 				
 # objects ---------------------------------------------------------------------#

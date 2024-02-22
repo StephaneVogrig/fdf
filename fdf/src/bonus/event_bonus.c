@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 03:07:35 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/21 03:35:04 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 06:55:02 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	on_key_press(int keycode, t_fdf *fdf)
 		map_rot_x_keyboard(fdf, keycode);
 	else if (keycode == KEY_PGUP || keycode == KEY_PGDOWN)
 		map_scale_z(fdf, keycode);
-// printf("key pressed: %d\n", keycode);
 	return (0);
 }
 
@@ -37,7 +36,7 @@ int	on_key_release(int keycode, t_fdf *fdf)
 	return (0);
 }
 
-int on_loop(t_fdf *fdf)
+int	on_loop(t_fdf *fdf)
 {
 	if (fdf->key_pressed)
 		on_key_press(fdf->key_pressed, fdf);

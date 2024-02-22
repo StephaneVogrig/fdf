@@ -6,18 +6,18 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 01:47:57 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/14 01:16:03 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 03:32:29 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pixel.h"
 
-t_pixel	pixel(int x, int y, t_ui32 color)
+t_pixel	pixel(int x, int y, t_color color)
 {
-	t_pixel	p;
+	t_pixel	pix;
 
-	p.x = x;
-	p.y = y;
-	p.color = color;
-	return (p);
+	pix.x = x;
+	pix.y = y;
+	pix.color = color;
+	return (pix);
 }

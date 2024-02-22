@@ -6,11 +6,11 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 03:14:41 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 00:56:03 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 05:48:43 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_img.h"
 
 inline void	draw_line_hor(t_fdf_img *img, t_pixel a, t_pixel b)
 {

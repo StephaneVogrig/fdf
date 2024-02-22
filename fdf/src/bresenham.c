@@ -6,11 +6,13 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 07:21:44 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 00:54:55 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 05:40:22 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+// #include "fdf.h"
+
+#include "fdf_img.h"
 
 inline void	bresenham_2(t_fdf_img *img, t_pixel a, t_pixel b, t_bresenham bres)
 {

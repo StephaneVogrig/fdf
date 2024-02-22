@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 11:54:34 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/21 22:39:41 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 06:14:20 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,12 @@ void	projection_gen(t_transform *transform, t_vec3f rot)
 	s.z = sin(rot.z);
 	cx_sy = c.x * s.y;
 	sx_sy = s.x * s.y;
-
-
 	transform->a1 = c.y * c.z;
 	transform->a2 = -c.y * s.z;
 	transform->a3 = s.y;
-
 	transform->b1 = c.x * s.z + c.z * sx_sy;
 	transform->b2 = c.x * c.z - sx_sy * s.z;
 	transform->b3 = -c.y * s.x;
-
 	transform->c1 = s.x * s.z - cx_sy * c.z;
 	transform->c2 = c.z * s.x + cx_sy * s.z;
 	transform->c3 = c.x * c.y;

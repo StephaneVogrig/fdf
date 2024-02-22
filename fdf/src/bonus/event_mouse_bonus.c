@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 03:23:41 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/21 05:41:47 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 06:20:45 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,11 @@ void	draw_sqare(t_fdf_img *img, int x, int y, t_color color)
 
 int	on_mouse_move(int x, int y, t_fdf *fdf)
 {
-	int dx;
-	int dy;
-	clock_t begin;
+	int		dx;
+	int		dy;
+	clock_t	begin;
 
 	begin = clock();
-// ft_printf("begin:%li\n", begin);
-
 	if (fdf->left_button_is_press)
 	{
 		dx = x - fdf->mouse_origin.x;
@@ -57,9 +55,8 @@ int	on_mouse_move(int x, int y, t_fdf *fdf)
 	}
 	if (fdf->right_button_is_press)
 	{
-		draw_sqare(&fdf->img, x, y, color(0,0,0,0));
+		draw_sqare(&fdf->img, x, y, color(0, 255, 0, 0));
 		mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img_mlx, 0, 0);
-		fdf->map.is_update = TRUE;
 	}
 	return (0);
 }
@@ -78,15 +75,12 @@ int	on_mouse_press(int button, int x, int y, t_fdf	*fdf)
 
 int	on_mouse_release(int button, int x, int y, t_fdf *fdf)
 {
-	if ( button == MOUSE_RIGHT)
+	if (button == MOUSE_RIGHT)
 		fdf->right_button_is_press = FALSE;
 	if (button == MOUSE_LEFT)
 	{
 		fdf->transform.dx += x - fdf->mouse_origin.x;
 		fdf->transform.dy += y - fdf->mouse_origin.y;
-		// img_clear(&fdf->map, &fdf->img);
-		// map_to_img(&fdf->map, &fdf->img, &fdf->transform);
-		// mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img_mlx, 0, 0);
 		render(fdf);
 		fdf->left_button_is_press = FALSE;
 	}

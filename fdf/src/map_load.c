@@ -6,11 +6,11 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 15:46:08 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 00:32:38 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 06:15:06 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "map.h"
 
 t_data	*file_line_to_data(char *str, int nbr_col)
 {
@@ -114,6 +114,7 @@ t_bool	map_load(char *path, t_map *map)
 	int		fd;
 	t_bool	ok;
 	t_list	*map_list;
+
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (error_perror("map_load"));

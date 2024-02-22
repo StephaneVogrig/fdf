@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   color_gradient.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 18:31:11 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/21 01:34:22 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 03:22:39 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "color.h"
+#include "color_gradient.h"
 
 inline t_gradiant	color_gradiant(t_color start, t_color end, t_vec2i d)
 {

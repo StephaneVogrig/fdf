@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:10:44 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/21 03:51:44 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 06:13:49 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 	ok = map_load(argv[1], &fdf.map);
 	if (ok)
 		ok = mlx_setup(&fdf);
-	if (ok) 
+	if (ok)
 	{
 		image_init(fdf.img_mlx, &fdf.img);
 		transform_init(&fdf.transform, &fdf.map, &fdf.img);

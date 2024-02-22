@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pixel_bonus.h                                      :+:      :+:    :+:   */
+/*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 20:07:46 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/21 04:17:22 by svogrig          ###   ########.fr       */
+/*   Created: 2024/02/22 04:09:09 by svogrig           #+#    #+#             */
+/*   Updated: 2024/02/22 04:31:08 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIXEL_BONUS_H
-# define PIXEL_BONUS_H
+#ifndef MAP_H
+# define MAP_H
 
+# include <fcntl.h>
 # include "libft.h"
 
-typedef struct s_pixel{
-	union {
-		t_vec2i		vec;
-		struct {
-			t_si32	x;
-			t_si32	y;
-		};
-	};
+typedef struct s_data{
+	int		z;
 	t_color	color;
-}	t_pixel;
+}	t_data;
 
-t_pixel	pixel(int x, int y, t_color color);
+typedef struct s_map{
+	int			nbr_line;
+	int			nbr_col;
+	t_data		**datas;
+	t_pixel		*buffer;
+}	t_map;
+
+t_bool	map_load(char *path, t_map *map);
 
 #endif

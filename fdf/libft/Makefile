@@ -6,7 +6,7 @@
 #    By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/02 02:59:52 by svogrig           #+#    #+#              #
-#    Updated: 2024/02/14 01:54:34 by svogrig          ###   ########.fr        #
+#    Updated: 2024/02/22 03:33:29 by svogrig          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS 		:=	char/ft_isalnum.c \
 				char/ft_toupper.c \
 				char/ft_tolower.c \
 				char/is_hexagit.c \
+				color/color.c \
 				error/error_msg.c \
 				error/error_perror.c \
 				int/ft_atoi.c \
@@ -53,6 +54,7 @@ SRCS 		:=	char/ft_isalnum.c \
 				mem/ft_memcpy.c \
 				mem/ft_memmove.c \
 				mem/ft_memset.c \
+				pixel/pixel.c \
 				put/ft_putchar_fd.c \
 				put/ft_putendl_fd.c \
 				put/ft_putnbr_fd.c \
