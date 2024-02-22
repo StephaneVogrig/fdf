@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 21:03:29 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/12 03:23:15 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/21 17:02:12 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	hexatoi_offset(char **str)
 {
 	int	nbr;
 
+	if (**str == '0' && (*(*str + 1) == 'x' || *(*str + 1) == 'X'))
+		*str += 2;
 	nbr = 0;
 	while (is_hexagit(**str))
 	{

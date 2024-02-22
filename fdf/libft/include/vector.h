@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 20:24:59 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/13 23:58:43 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/21 20:07:51 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_vec4_float32{
 	t_float32	z;
 }	t_vec4f;
 
-t_vec4f	vector4f(t_float32 w, t_float32 x, t_float32 y, t_float32 z);
+t_vec4f	vector4f(t_float32 x, t_float32 y, t_float32 z, t_float32 w);
 t_vec4f	vector4f_sub(t_vec4f point_a, t_vec4f point_b);
 t_vec4f	vector4f_add(t_vec4f point_a, t_vec4f point_b);
 

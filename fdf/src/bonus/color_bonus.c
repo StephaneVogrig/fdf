@@ -1,16 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   color_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 18:31:11 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/21 01:34:22 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/21 04:01:35 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "color.h"
+#include "fdf_bonus.h"
+
+inline t_color	color(t_ui8 a, t_ui8 r, t_ui8 g, t_ui8 b)
+{
+	t_color	color;
+
+	color.a = a;
+	color.r = r;
+	color.g = g;
+	color.b = b;
+	return (color);
+}
 
 inline t_gradiant	color_gradiant(t_color start, t_color end, t_vec2i d)
 {
@@ -31,7 +42,6 @@ inline t_gradiant	color_gradiant(t_color start, t_color end, t_vec2i d)
 	grad.gradiant.z = (end.b - start.b) * ratio;
 	return (grad);
 }
-
 inline t_color	color_gradiant_add(t_gradiant *grad)
 {
 	t_color	result;

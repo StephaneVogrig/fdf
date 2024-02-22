@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_line.c                                        :+:      :+:    :+:   */
+/*   draw_line_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 03:14:41 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 00:56:03 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/21 06:37:51 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 inline void	draw_line_hor(t_fdf_img *img, t_pixel a, t_pixel b)
 {
@@ -34,7 +34,7 @@ inline void	draw_line_hor(t_fdf_img *img, t_pixel a, t_pixel b)
 
 inline void	draw_line_diag(t_fdf_img *img, t_pixel a, t_pixel b)
 {
-	t_vec2i		d;
+	t_vec2i	d;
 	t_gradiant	gradiant;
 
 	if (a.x < b.x)
@@ -52,7 +52,7 @@ inline void	draw_line_diag(t_fdf_img *img, t_pixel a, t_pixel b)
 	{
 		if (a.color.ui != b.color.ui)
 			a.color = color_gradiant_add(&gradiant);
-		img_set_pixel(img, a.x, a.y, a.color);
+		img_set_pixel(img, a.x, a.y, a.color );
 		a.x += d.x;
 		a.y += d.y;
 	}
@@ -64,7 +64,7 @@ inline void	draw_line_vert(t_fdf_img *img, t_pixel a, t_pixel b)
 	t_gradiant	gradiant;
 
 	if (a.y == b.y)
-		return ;
+		return ;		
 	if (a.y < b.y)
 		dy = 1;
 	else
@@ -80,20 +80,34 @@ inline void	draw_line_vert(t_fdf_img *img, t_pixel a, t_pixel b)
 	}
 }
 
-void	draw_line_oblique(t_fdf_img *img, t_pixel a, t_pixel b)
+void	draw_line_oblique(t_fdf_img *img, t_pixel a, t_pixel b, t_vec2i d)
 {
 	t_vec2i	abs_d;
 
-	abs_d.x = ft_abs(b.x - a.x);
-	abs_d.y = ft_abs(b.y - a.y);
+	abs_d.x = ft_abs(d.x);
+	abs_d.y = ft_abs(d.y);
 	if (abs_d.x == abs_d.y)
 		draw_line_diag(img, a, b);
+	else if (abs_d.y < abs_d.x)
+	{
+		if (a.x < b.x)
+			draw_line_bresenham_x(img, a, b, abs_d);
+		else
+			draw_line_bresenham_x(img, b, a, abs_d);
+	}
 	else
-		bresenham(img, a, b, abs_d);
+	{
+		if (a.y < b.y)
+			draw_line_bresenham_y(img, a, b, abs_d);
+		else
+			draw_line_bresenham_y(img, b, a, abs_d);
+	}
 }
+
 
 void	draw_line(t_fdf_img *img, t_pixel a, t_pixel b)
 {
+	t_vec2i	d;
 	t_vec3f	g_color;
 
 	if (a.x >= img->width && b.x >= img->width || a.x < 0 && b.x < 0)
@@ -105,5 +119,8 @@ void	draw_line(t_fdf_img *img, t_pixel a, t_pixel b)
 	else if (a.y == b.y)
 		draw_line_hor(img, a, b);
 	else
-		draw_line_oblique(img, a, b);
+	{
+		d = vector2i_sub(b.vec, a.vec);
+		draw_line_oblique(img, a, b, d);		
+	}
 }
