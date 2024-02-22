@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:03:51 by stephane          #+#    #+#             */
-/*   Updated: 2024/02/22 05:50:47 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 22:13:15 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 # define FDF_H
 
 # include <math.h>
-// # include "mlx_int.h"
 # include "mlx.h"
 # include "libft.h"
 # include "color_gradient.h"
-# include "pixel.h"
 # include "map.h"
 # include "fdf_img.h"
 

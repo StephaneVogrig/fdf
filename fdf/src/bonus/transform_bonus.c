@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:43:41 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 06:16:01 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 22:38:36 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,14 @@ t_bound	bounding_box_projection(t_map *map, t_transform *t)
 ** center bouding box = 2/2 min + 1/2 max - 1/2 min
 ** center bouding box = 1/2 min + 1/2 max
 */
-void	transform_init(t_transform *t, t_map *map, t_fdf_img *img)
+void	transform_resize(t_transform *t, t_map *map, t_fdf_img *img)
 {
 	t_bound		bb;
 	t_vec2f		dim_bb;
-	t_vec2f		dim_proj;
-	t_vec2f		center_proj;
 
-	t->offset_map.x = -(float)(map->nbr_col - 1) / 2;
-	t->offset_map.y = -(float)(map->nbr_line - 1) / 2;
-	projection_iso(t);
-	t->rot = vector3f(90 - 35.26, 0.0, 45.0);
 	t->scale = 1;
-	t->scale_z = 1;
+	t->dx = 0;
+	t->dy = 0;
 	bb = bounding_box_projection(map, t);
 	dim_bb = vector2f_sub(bb.max, bb.min);
 	if (dim_bb.x != 0 || dim_bb.y != 0)
@@ -93,4 +88,17 @@ void	transform_init(t_transform *t, t_map *map, t_fdf_img *img)
 	bb.max.y *= t->scale;
 	t->dx = (WINDOW_WIDTH - bb.max.x - bb.min.x) / 2;
 	t->dy = (WINDOW_HIGTH - bb.max.y - bb.min.y) / 2;
+}
+
+void	transform_init(t_transform *t, t_map *map, t_fdf_img *img)
+{
+	t_bound		bb;
+	t_vec2f		dim_bb;
+
+	t->offset_map.x = -(float)(map->nbr_col - 1) / 2;
+	t->offset_map.y = -(float)(map->nbr_line - 1) / 2;
+	projection_iso(t);
+	t->rot = vector3f(90 - 35.26, 0.0, 45.0);
+	t->scale_z = 1;
+	transform_resize(t, map, img);
 }

@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 07:21:44 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 05:40:22 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 21:50:47 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 #include "fdf_img.h"
 
-inline void	bresenham_2(t_fdf_img *img, t_pixel a, t_pixel b, t_bresenham bres)
+inline void	bresenloop(t_fdf_img *img, t_pixel a, t_pixel b, t_bresenham bres)
 {
-	int			err;
-	int			e2;
-	t_gradiant	gradiant;
+	int		err;
+	int		e2;
+	t_grad	gradiant;
 
 	gradiant = color_gradiant(a.color, b.color, vector2i_sub(b.vec, a.vec));
 	err = bres.dx + bres.dy;
@@ -55,5 +55,5 @@ inline void	bresenham(t_fdf_img *img, t_pixel a, t_pixel b, t_vec2i abs_d)
 		bres.sy = 1;
 	else
 		bres.sy = -1;
-	bresenham_2(img, a, b, bres);
+	bresenloop(img, a, b, bres);
 }

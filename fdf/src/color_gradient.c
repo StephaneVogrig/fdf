@@ -6,15 +6,15 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 18:31:11 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 03:22:39 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 19:17:25 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color_gradient.h"
 
-inline t_gradiant	color_gradiant(t_color start, t_color end, t_vec2i d)
+inline t_grad	color_gradiant(t_color start, t_color end, t_vec2i d)
 {
-	t_gradiant	grad;
+	t_grad		grad;
 	t_float32	ratio;
 
 	grad.accu.x = start.r;
@@ -32,7 +32,7 @@ inline t_gradiant	color_gradiant(t_color start, t_color end, t_vec2i d)
 	return (grad);
 }
 
-inline t_color	color_gradiant_add(t_gradiant *grad)
+inline t_color	color_gradiant_add(t_grad *grad)
 {
 	t_color	result;
 

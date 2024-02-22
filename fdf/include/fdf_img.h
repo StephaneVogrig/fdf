@@ -6,16 +6,16 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 05:24:11 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 06:09:56 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 22:13:31 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_IMG_H
 # define FDF_IMG_H
 
+# include "mlx_int.h"
 # include "libft.h"
 # include "color_gradient.h"
-# include "mlx_int.h"
 
 typedef struct s_fdf_img{
 	int		size_line;

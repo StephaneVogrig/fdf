@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 11:54:34 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 06:14:20 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 10:13:46 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	projection_iso(t_transform *transform)
 	transform->c3 = 0;
 }
 
-void	projection_plane(t_transform *transform)
+void	projection_flat(t_transform *transform)
 {
 	transform->a1 = 1;
 	transform->a2 = 0;
@@ -65,4 +65,15 @@ void	projection_plane(t_transform *transform)
 	transform->c1 = 0;
 	transform->c2 = 0;
 	transform->c3 = 1;
+}
+
+void	projection(t_fdf *fdf, int keycode)
+{
+	if (keycode == KEY_F5)
+		projection_iso(&fdf->transform);
+	if (keycode == KEY_F6)
+		projection_flat(&fdf->transform);
+	if (keycode == KEY_F7)
+		projection_gen(&fdf->transform, fdf->transform.rot);
+	render(fdf);
 }

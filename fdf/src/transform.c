@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:43:41 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 02:13:45 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 18:07:27 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ void	transform_init(t_transform *t, t_map *map, t_fdf_img *img)
 {
 	t_bound		bb;
 	t_vec2f		dim_bb;
-	t_vec2f		dim_proj;
-	t_vec2f		center_proj;
 
 	t->offset_map.x = -(float)(map->nbr_col - 1) / 2;
 	t->offset_map.y = -(float)(map->nbr_line - 1) / 2;

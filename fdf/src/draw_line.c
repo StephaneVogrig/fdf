@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 03:14:41 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 05:48:43 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 19:16:49 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 inline void	draw_line_hor(t_fdf_img *img, t_pixel a, t_pixel b)
 {
-	int			dx;
-	t_gradiant	gradiant;
+	int		dx;
+	t_grad	gradiant;
 
 	if (a.x < b.x)
 		dx = 1;
@@ -34,8 +34,8 @@ inline void	draw_line_hor(t_fdf_img *img, t_pixel a, t_pixel b)
 
 inline void	draw_line_diag(t_fdf_img *img, t_pixel a, t_pixel b)
 {
-	t_vec2i		d;
-	t_gradiant	gradiant;
+	t_vec2i	d;
+	t_grad	gradiant;
 
 	if (a.x < b.x)
 		d.x = 1;
@@ -60,8 +60,8 @@ inline void	draw_line_diag(t_fdf_img *img, t_pixel a, t_pixel b)
 
 inline void	draw_line_vert(t_fdf_img *img, t_pixel a, t_pixel b)
 {
-	int			dy;
-	t_gradiant	gradiant;
+	int		dy;
+	t_grad	gradiant;
 
 	if (a.y == b.y)
 		return ;

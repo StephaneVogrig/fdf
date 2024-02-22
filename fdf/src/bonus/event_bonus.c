@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 03:07:35 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 07:29:01 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 22:09:34 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,23 @@ int	on_key_press(int keycode, t_fdf *fdf)
 		zoom_increase(fdf);
 	else if (keycode == NUMPAD_KEY_MINUS)
 		zoom_decrease(fdf);
-ft_printf("keycode:%i\n", keycode);
 	return (0);
 }
 
 int	on_key_release(int keycode, t_fdf *fdf)
 {
 	fdf->key_pressed = 0;
+	if (keycode == NUMPAD_KEY_SLASH)
+		z_scale_10(fdf);
+	else if (keycode == KEY_F5 || keycode == KEY_F6 || keycode == KEY_F7)
+		projection(fdf, keycode);
+	else if (keycode == KEY_F1 || keycode == KEY_F2 || keycode == KEY_F3 || \
+			keycode == KEY_F4)
+		color_game(fdf, keycode);
+	else if (keycode == NUMPAD_KEY_5)
+		map_resize(fdf);
+	else if (keycode == NUMPAD_KEY_ENTER)
+		map_earth_size(fdf);
 	return (0);
 }
 
