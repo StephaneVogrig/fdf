@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 06:42:19 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 01:49:38 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 07:28:02 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ inline void	zoom_decrease(t_fdf *fdf)
 	render(fdf);
 }
 
-inline void	zoom_increase(t_fdf *fdf, int x, int y)
+inline void	zoom_increase(t_fdf *fdf)
 {
 	fdf->transform.scale *= 1.05;
 	render(fdf);

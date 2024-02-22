@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 03:23:41 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 06:20:45 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 07:28:06 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,6 @@ int	on_mouse_release(int button, int x, int y, t_fdf *fdf)
 	if (button == MOUSE_ROLLUP)
 		zoom_decrease(fdf);
 	if (button == MOUSE_ROLLDOWN)
-		zoom_increase(fdf, x, y);
+		zoom_increase(fdf);
 	return (0);
 }

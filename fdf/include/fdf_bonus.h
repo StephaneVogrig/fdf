@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:03:51 by stephane          #+#    #+#             */
-/*   Updated: 2024/02/22 06:10:53 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 07:28:33 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,14 @@
 # define KEY_DOWN_ARROW 65364
 # define KEY_PGUP 65365
 # define KEY_PGDOWN 65366
+# define KEY_SPACE 32
 
 # define NUMPAD_KEY_4 65430
 # define NUMPAD_KEY_8 65431
 # define NUMPAD_KEY_6 65432
 # define NUMPAD_KEY_2 65433
+# define NUMPAD_KEY_MORE 65451
+# define NUMPAD_KEY_MINUS 65453
 
 # define MOVE_STEP 5
 
@@ -139,7 +142,7 @@ void	transform_init(t_transform *transform, t_map *map, t_fdf_img *img);
 t_vec2f	compute_point(float x, float y, float z, t_transform *t);
 
 /* zoom ----------------------------------------------------------------------*/
-void	zoom_increase(t_fdf *fdf, int x, int y);
+void	zoom_increase(t_fdf *fdf);
 void	zoom_decrease(t_fdf *fdf);
 
 #endif

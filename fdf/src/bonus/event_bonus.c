@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 03:07:35 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 06:55:02 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/22 07:29:01 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ int	on_key_press(int keycode, t_fdf *fdf)
 		map_rot_x_keyboard(fdf, keycode);
 	else if (keycode == KEY_PGUP || keycode == KEY_PGDOWN)
 		map_scale_z(fdf, keycode);
+	else if (keycode == NUMPAD_KEY_MORE)
+		zoom_increase(fdf);
+	else if (keycode == NUMPAD_KEY_MINUS)
+		zoom_decrease(fdf);
+ft_printf("keycode:%i\n", keycode);
 	return (0);
 }
 
