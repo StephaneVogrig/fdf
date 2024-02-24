@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 13:12:00 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 21:27:25 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/24 04:19:32 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ t_color	col_grad_step(t_grad grad, int step)
 t_grad	grad_step(t_ui32 start, t_ui32 end, int step)
 {
 	t_grad		grad;
-	t_float32	ratio;
 	t_color		color;
 
 	if (step == 0)

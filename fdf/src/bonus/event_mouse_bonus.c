@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 03:23:41 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 07:28:06 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/24 04:36:24 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,21 @@
 
 void	draw_sqare(t_fdf_img *img, int x, int y, t_color color)
 {
-	int	x_max;
-	int	y_max;
+	t_vec2i	max;
 	int	xx;
 
 	if (x < 0 || y < 0 || x >= WINDOW_WIDTH || y > WINDOW_HIGTH)
 		return ;
-	x_max = x + 10;
-	if (x_max >= WINDOW_WIDTH)
-		x_max = WINDOW_WIDTH - 1;
-	y_max = y + 10;
-	if (y_max >= WINDOW_HIGTH)
-		y_max = WINDOW_HIGTH - 1;
-	while (y < y_max)
+	max.x = x + 10;
+	if (max.x >= WINDOW_WIDTH)
+		max.x = WINDOW_WIDTH - 1;
+	max.y = y + 10;
+	if (max.y >= WINDOW_HIGTH)
+		max.y = WINDOW_HIGTH - 1;
+	while (y < max.y)
 	{
 		xx = x;
-		while (xx < x_max)
+		while (xx < max.x)
 		{
 			img_set_pixel(img, xx, y, color);
 			xx++;
@@ -87,8 +86,8 @@ int	on_mouse_release(int button, int x, int y, t_fdf *fdf)
 	if (button == MOUSE_MIDLE)
 		render(fdf);
 	if (button == MOUSE_ROLLUP)
-		zoom_decrease(fdf);
+		zoom_decrease(fdf, x, y);
 	if (button == MOUSE_ROLLDOWN)
-		zoom_increase(fdf);
+		zoom_increase(fdf, x, y);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:43:41 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 22:38:36 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/24 04:29:59 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,6 @@ void	transform_resize(t_transform *t, t_map *map, t_fdf_img *img)
 
 void	transform_init(t_transform *t, t_map *map, t_fdf_img *img)
 {
-	t_bound		bb;
-	t_vec2f		dim_bb;
-
 	t->offset_map.x = -(float)(map->nbr_col - 1) / 2;
 	t->offset_map.y = -(float)(map->nbr_line - 1) / 2;
 	projection_iso(t);

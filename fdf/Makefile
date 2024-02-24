@@ -6,7 +6,7 @@
 #    By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/03 19:41:13 by stephane          #+#    #+#              #
-#    Updated: 2024/02/22 22:22:43 by svogrig          ###   ########.fr        #
+#    Updated: 2024/02/24 04:52:04 by svogrig          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,14 +53,13 @@ SRC_BONUS	:=	bresenham.c \
 
 SRC_BONUS	:=	$(SRC_BONUS:%=$(DIR_SRC)/%)
 
-
 # includes --------------------------------------------------------------------#
 
 DIR_INC		:=	/usr/include \
 				mlx_linux \
 				libft/include \
 				include
-I_FLAG		:=	$(addprefix -I,$(DIR_INC))
+I_FLAG		:=	$(addprefix -I,$(DIR_INC)) -MMD -MP
 				
 # library ---------------------------------------------------------------------#
 
@@ -114,17 +113,17 @@ bonusonly: $(NAME_BONUS)
 $(NAME_BONUS): $(OBJ_BONUS) 
 	@$(MAKE) -j -C libft
 	@$(MAKE) -C mlx_linux
-	@$(CC) $(CC_FLAGS) $(OBJ_BONUS) $(L_FLAG) $(l_FLAG) -o $(NAME_BONUS)
+	@$(CC) $(CC_FLAGS) $(OBJ_BONUS) $(L_FLAG) $(l_FLAG) -Ofast -o $(NAME_BONUS)
 	$(info created : $(NAME_BONUS))
 
 $(DIR_BUILD)/%.o: $(DIR_SRC)/%.c
 	@mkdir -p $(@D)
-	@$(CC) $(I_FLAG) -O3 -pg -c $< -o $@
+	@$(CC) $(CC_FLAGS) $(I_FLAG) -Ofast -pg -c $< -o $@
 	$(info created : $@)
 
 $(DIR_BUILD)/sanitized/%.o: $(DIR_SRC)/%.c
 	@mkdir -p $(@D)
-	@$(CC) $(I_FLAG) -fsanitize=address -O3 -c $< -o $@
+	@$(CC) $(CC_FLAGS) $(I_FLAG) -fsanitize=address -c $< -o $@
 	$(info created : $@)
 
 -include $(DEPS)
@@ -151,7 +150,7 @@ run: $(NAME)
 	@- ./fdf ../test_maps/elem-col.fdf
 
 valgrind: $(NAME)
-	@$(CC) $(OBJ) $(L_FLAG) $(L_FLAG) $(l_FLAG)  -g -o $(NAME)
+	@$(CC) $(OBJ) $(L_FLAG) $(L_FLAG) $(l_FLAG) -g -o $(NAME)
 	$(info valgrind created : $(NAME))
 	@- valgrind --leak-check=full --track-origins=yes --track-fds=yes ./fdf test_maps/elem-col.fdf
 

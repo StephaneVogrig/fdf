@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:07:16 by stephane          #+#    #+#             */
-/*   Updated: 2024/02/22 20:19:19 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/24 03:47:01 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 int	main(int argc, char **argv)
 {
-	int		fd;
 	t_fdf	fdf;
 	t_bool	ok;
 
 	if (argc != 2)
+	{
+		ft_printf("usage: ./fdf <map_file>\n");
 		return (0);
+	}
 	fdf_init(&fdf);
 	ok = map_load(argv[1], &fdf.map);
 	if (ok)

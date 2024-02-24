@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:10:44 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 10:24:51 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/24 04:21:11 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	main(int argc, char **argv)
 {
-	int		fd;
 	t_fdf	fdf;
 	t_bool	ok;
 

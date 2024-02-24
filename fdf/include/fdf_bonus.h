@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:03:51 by stephane          #+#    #+#             */
-/*   Updated: 2024/02/22 22:11:47 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/24 03:28:23 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ void	z_scale_10(t_fdf *fdf);
 void	find_minmax_z(t_map *map, t_data **datas);
 
 /* zoom ----------------------------------------------------------------------*/
-void	zoom_increase(t_fdf *fdf);
-void	zoom_decrease(t_fdf *fdf);
+void	zoom_increase(t_fdf *fdf, int x, int y);
+void	zoom_decrease(t_fdf *fdf, int x, int y);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 15:46:08 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 06:15:06 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/24 03:44:31 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ t_data	*file_line_to_data(char *str, int nbr_col)
 {
 	t_data	*new_data_line;
 	int		col;
-	int		sign;
 
 	new_data_line = malloc(sizeof(t_data) * nbr_col);
 	if (!new_data_line)
@@ -112,7 +111,6 @@ t_data	**map_list_to_tab(t_list *list, int nbr_line)
 t_bool	map_load(char *path, t_map *map)
 {
 	int		fd;
-	t_bool	ok;
 	t_list	*map_list;
 
 	fd = open(path, O_RDONLY);

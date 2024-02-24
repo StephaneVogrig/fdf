@@ -6,13 +6,13 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 03:14:41 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 19:16:49 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/24 04:48:22 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_img.h"
 
-inline void	draw_line_hor(t_fdf_img *img, t_pixel a, t_pixel b)
+void	draw_line_hor(t_fdf_img *img, t_pixel a, t_pixel b)
 {
 	int		dx;
 	t_grad	gradiant;
@@ -32,7 +32,7 @@ inline void	draw_line_hor(t_fdf_img *img, t_pixel a, t_pixel b)
 	}
 }
 
-inline void	draw_line_diag(t_fdf_img *img, t_pixel a, t_pixel b)
+void	draw_line_diag(t_fdf_img *img, t_pixel a, t_pixel b)
 {
 	t_vec2i	d;
 	t_grad	gradiant;
@@ -58,7 +58,7 @@ inline void	draw_line_diag(t_fdf_img *img, t_pixel a, t_pixel b)
 	}
 }
 
-inline void	draw_line_vert(t_fdf_img *img, t_pixel a, t_pixel b)
+void	draw_line_vert(t_fdf_img *img, t_pixel a, t_pixel b)
 {
 	int		dy;
 	t_grad	gradiant;
@@ -94,11 +94,9 @@ void	draw_line_oblique(t_fdf_img *img, t_pixel a, t_pixel b)
 
 void	draw_line(t_fdf_img *img, t_pixel a, t_pixel b)
 {
-	t_vec3f	g_color;
-
-	if (a.x >= img->width && b.x >= img->width || a.x < 0 && b.x < 0)
+	if ((a.x >= img->width && b.x >= img->width) || (a.x < 0 && b.x < 0))
 		return ;
-	if (a.y >= img->height && b.y >= img->height || a.y < 0 && b.y < 0)
+	if ((a.y >= img->height && b.y >= img->height) || (a.y < 0 && b.y < 0))
 		return ;
 	if (a.x == b.x)
 		draw_line_vert(img, a, b);

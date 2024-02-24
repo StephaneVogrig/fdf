@@ -6,13 +6,13 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 05:29:54 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 06:19:34 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/24 04:50:32 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
 
-inline t_pixel	compute_pixel(int x, int y, t_data data, t_transform *t)
+t_pixel	compute_pixel(int x, int y, t_data data, t_transform *t)
 {
 	t_vec2f	point;
 	t_pixel	pixel;
@@ -51,7 +51,7 @@ void	map_draw_img(t_fdf_img *img, t_map *map, t_transform *t)
 	}
 }
 
-inline void	buffer_init(t_map *map, t_transform *transform)
+void	buffer_init(t_map *map, t_transform *transform)
 {
 	int	x;
 
@@ -63,7 +63,7 @@ inline void	buffer_init(t_map *map, t_transform *transform)
 	}
 }
 
-inline void	map_draw_buffer(t_fdf_img *img, t_pixel *buffer, int buffer_size)
+void	map_draw_buffer(t_fdf_img *img, t_pixel *buffer, int buffer_size)
 {
 	int	x;
 
