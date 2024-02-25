@@ -4,6 +4,7 @@
 *.d
 fdf/mlx_linux/test/mlx-test
 fdf/fdf
+fdf/fdf_bonus
 gmon.out
 *.vscode
 *libft.a

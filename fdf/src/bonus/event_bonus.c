@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 03:07:35 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/24 04:59:58 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/25 02:02:36 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	on_key_press(int keycode, t_fdf *fdf)
 	else if (keycode == KEY_PGUP || keycode == KEY_PGDOWN)
 		map_scale_z(fdf, keycode);
 	else if (keycode == NUMPAD_KEY_MORE)
-		zoom_increase(fdf,  WINDOW_WIDTH / 2, WINDOW_HIGTH / 2);
+		zoom_increase(fdf, WINDOW_WIDTH / 2, WINDOW_HIGTH / 2);
 	else if (keycode == NUMPAD_KEY_MINUS)
 		zoom_decrease(fdf, WINDOW_WIDTH / 2, WINDOW_HIGTH / 2);
 	return (0);

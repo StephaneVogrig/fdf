@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 03:23:41 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/24 04:36:24 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/25 02:06:07 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,23 @@
 void	draw_sqare(t_fdf_img *img, int x, int y, t_color color)
 {
 	t_vec2i	max;
-	int	xx;
+	int		i;
 
 	if (x < 0 || y < 0 || x >= WINDOW_WIDTH || y > WINDOW_HIGTH)
 		return ;
 	max.x = x + 10;
+	max.y = y + 10;
 	if (max.x >= WINDOW_WIDTH)
 		max.x = WINDOW_WIDTH - 1;
-	max.y = y + 10;
 	if (max.y >= WINDOW_HIGTH)
 		max.y = WINDOW_HIGTH - 1;
 	while (y < max.y)
 	{
-		xx = x;
-		while (xx < max.x)
+		i = x;
+		while (i < max.x)
 		{
-			img_set_pixel(img, xx, y, color);
-			xx++;
+			img_set_pixel(img, i, y, color);
+			i++;
 		}
 		y++;
 	}
