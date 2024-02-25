@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 13:12:00 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/24 04:19:32 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/25 03:47:35 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_color	col_grad_step(t_grad grad, int step)
 {
 	t_color	color;
 
+	color.ui = 0;
 	color.r = round(grad.accu.x + grad.gradiant.x * step);
 	color.g = round(grad.accu.y + grad.gradiant.y * step);
 	color.b = round(grad.accu.z + grad.gradiant.z * step);

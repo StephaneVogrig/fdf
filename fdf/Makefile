@@ -6,12 +6,14 @@
 #    By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/03 19:41:13 by stephane          #+#    #+#              #
-#    Updated: 2024/02/24 04:52:04 by svogrig          ###   ########.fr        #
+#    Updated: 2024/02/25 04:47:56 by svogrig          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:=	fdf
 NAME_BONUS	:=	fdf_bonus
+NAME_DEBUG	:=	fdf_debug
+NAME_SAN	:=	fdf_sanitize
 
 # sources ---------------------------------------------------------------------#
 
@@ -63,6 +65,9 @@ I_FLAG		:=	$(addprefix -I,$(DIR_INC)) -MMD -MP
 				
 # library ---------------------------------------------------------------------#
 
+LIB_FT		:=	libft/libf.a
+LIB_MLX		:=	mlx_linux/libmlx_linux.a
+
 L_FLAG		:=	mlx_linux \
 				/usr/lib \
 				libft
@@ -82,8 +87,9 @@ l_FLAG		:=	$(addprefix -l,$(l_FLAG))
 
 DIR_BUILD	:=	.build
 OBJ			:=	$(SRC:$(DIR_SRC)/%.c=$(DIR_BUILD)/%.o)
-OBJ_SAN		:=	$(SRC:$(DIR_SRC)/%.c=$(DIR_BUILD)/sanitized/%.o)
 OBJ_BONUS	:=	$(SRC_BONUS:$(DIR_SRC)/%.c=$(DIR_BUILD)/%.o)
+OBJ_DEBUG	:=	$(SRC:$(DIR_SRC)/%.c=$(DIR_BUILD)/debug/%.o)
+OBJ_SAN		:=	$(SRC:$(DIR_SRC)/%.c=$(DIR_BUILD)/sanitize/%.o)
 
 DEPS		:=	$(OBJ:.o=.d) $(OBJ_SAN:.o=.d) $(OBJ_BONUS:.o=.d)
 
@@ -91,6 +97,10 @@ DEPS		:=	$(OBJ:.o=.d) $(OBJ_SAN:.o=.d) $(OBJ_BONUS:.o=.d)
 
 CC			:=	cc
 CC_FLAGS	:=	-Wall -Wextra -Werror
+
+DEBUG_FLAGS	:=	-g
+VAL_FLAGS	:=	--leak-check=full --track-origins=yes --track-fds=yes
+SAN_FLAGS	:=	-fsanitize=address -g
 
 # make ------------------------------------------------------------------------#
 
@@ -100,71 +110,92 @@ MAKEFLAGS	+=	--no-print-directory
 # rules                                                                        #
 #------------------------------------------------------------------------------#
 
-all: $(NAME)
-
-$(NAME): $(OBJ)
-	@$(MAKE) -j -C libft
-	@$(MAKE) -C mlx_linux
-	@$(CC) $(CC_FLAGS) $(OBJ) $(L_FLAG) $(l_FLAG) -o $(NAME)
-	$(info created : $(NAME))
-
-bonusonly: $(NAME_BONUS)
-
-$(NAME_BONUS): $(OBJ_BONUS) 
-	@$(MAKE) -j -C libft
-	@$(MAKE) -C mlx_linux
-	@$(CC) $(CC_FLAGS) $(OBJ_BONUS) $(L_FLAG) $(l_FLAG) -Ofast -o $(NAME_BONUS)
-	$(info created : $(NAME_BONUS))
-
-$(DIR_BUILD)/%.o: $(DIR_SRC)/%.c
-	@mkdir -p $(@D)
-	@$(CC) $(CC_FLAGS) $(I_FLAG) -Ofast -pg -c $< -o $@
-	$(info created : $@)
-
-$(DIR_BUILD)/sanitized/%.o: $(DIR_SRC)/%.c
-	@mkdir -p $(@D)
-	@$(CC) $(CC_FLAGS) $(I_FLAG) -fsanitize=address -c $< -o $@
-	$(info created : $@)
-
--include $(DEPS)
+all:
+	@$(MAKE) -j makeall
 
 clean:
 	@$(MAKE) -C libft clean
 	@$(MAKE) -C mlx_linux clean
-	@rm -f $(OBJ) $(OBJ_BONUS) $(OBJ_SAN) $(DEPS)
+	@rm -f $(OBJ) $(OBJ_BONUS) $(OBJ_DEBUG) $(OBJ_SAN) $(DEPS)
 
 fclean: clean
 	@$(MAKE) -C libft fclean
-	@rm -f $(NAME) $(NAME_BONUS) $(NAME)_sanitized gmon.out 
+	@rm -f $(NAME) $(NAME_BONUS) $(NAME_DEBUG) $(NAME_SAN)
 
 re: fclean
-	@$(MAKE) -j all
-
-rebonus: fclean
-	@$(MAKE) -j bonusonly
+	@$(MAKE) -j makeall
 
 bonus:
-	@$(MAKE) -j bonusonly
+	@$(MAKE) -j makebonus
 
-run: $(NAME)
-	@- ./fdf ../test_maps/elem-col.fdf
+rebonus: re bonus
 
-valgrind: $(NAME)
-	@$(CC) $(OBJ) $(L_FLAG) $(L_FLAG) $(l_FLAG) -g -o $(NAME)
-	$(info valgrind created : $(NAME))
-	@- valgrind --leak-check=full --track-origins=yes --track-fds=yes ./fdf test_maps/elem-col.fdf
+run: all
+	@- ./$(NAME) test_maps_2/France.XXL.fdf
 
-sanitizer: $(OBJ_SAN)
-	@$(CC) $(OBJ_SAN) $(L_FLAG) $(L_FLAG) $(l_FLAG) -fsanitize=address -o $(NAME)_sanitized
-	@- ./fdf_sanitized test_maps/42.fdf
+runbonus: bonus
+	@- ./$(NAME_BONUS) test_maps_2/France.XXL.fdf
 
-gprof:
-	@$(CC) $(OBJ) $(L_FLAG) $(L_FLAG) $(l_FLAG) -pg -o $(NAME)
-	@- ./fdf test_maps/elem-col.fdf
+debug:
+	@$(MAKE) -j makedebug
+
+valgrind: debug
+	@- valgrind $(VAL_FLAGS) ./$(NAME_DEBUG) test_maps/elem-col.fdf
+
+sanitize:
+	@$(MAKE) -j makesanitize
+	@- ./$(NAME_SAN) test_maps/elem-col.fdf
+
+gprofb:
+	@$(MAKE) -j makegprofb
+
+makeall:		$(NAME)
+makebonus:		$(NAME_BONUS)
+makedebug:		$(NAME_DEBUG)
+makesanitize:	$(NAME_SAN)
+makegprofb:		$(NAME_GPROFB)
+
+$(NAME): $(OBJ) $(LIB_MLX) $(LIB_FT)
+	@$(CC) $(CC_FLAGS) $(OBJ) $(L_FLAG) $(l_FLAG) -o $(NAME)
+	$(info created : $(NAME))
+
+$(NAME_BONUS): $(OBJ_BONUS) $(LIB_MLX) $(LIB_FT)
+	@$(CC) $(CC_FLAGS) $(OBJ_BONUS) $(L_FLAG) $(l_FLAG) -pg -o $(NAME_BONUS)
+	$(info created : $(NAME_BONUS))
+
+$(NAME_DEBUG): $(OBJ_DEBUG) $(LIB_MLX) $(LIB_FT)
+	@$(CC) $(CC_FLAGS) $(OBJ) $(L_FLAG) $(l_FLAG) -g -o $(NAME_DEBUG)
+	$(info created : $(NAME_DEBUG))
+
+$(NAME_SAN): $(OBJ_SAN) $(LIB_MLX) $(LIB_FT)
+	@$(CC) $(OBJ_SAN) $(L_FLAG) $(l_FLAG) $(SAN_FLAGS) -o $(NAME_SAN)
+	$(info created : $(NAME_SAN))
+
+$(DIR_BUILD)/%.o: $(DIR_SRC)/%.c
+	@mkdir -p $(@D)
+	@$(CC) $(CC_FLAGS) $(I_FLAG) -pg -c $< -o $@
+	$(info created : $@)
+
+$(DIR_BUILD)/debug/%.o: $(DIR_SRC)/%.c
+	@mkdir -p $(@D)
+	@$(CC) $(CC_FLAGS) $(I_FLAG) $(DEBUG_FLAGS) -c $< -o $@
+	$(info created : $@)
+
+$(DIR_BUILD)/sanitize/%.o: $(DIR_SRC)/%.c
+	@mkdir -p $(@D)
+	@$(CC) $(CC_FLAGS) $(I_FLAG) $(SAN_FLAGS) -c $< -o $@
+	$(info created : $@)
+
+$(LIB_FT):
+	@$(MAKE) -j -C libft
+
+$(LIB_MLX):
+	@$(MAKE) -j -C mlx_linux
+
+-include $(DEPS)
 
 #------------------------------------------------------------------------------#
 # specifications                                                               #
 #------------------------------------------------------------------------------#
 
 .PHONY: all clean fclean re run mlx
-#.SILENT:

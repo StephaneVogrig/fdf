@@ -6,7 +6,7 @@
 /*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 18:31:11 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 19:17:25 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/25 03:35:05 by svogrig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ inline t_grad	color_gradiant(t_color start, t_color end, t_vec2i d)
 
 inline t_color	color_gradiant_add(t_grad *grad)
 {
-	t_color	result;
+	t_color	color;
 
+	color.ui = 0x00;
 	grad->accu.x += grad->gradiant.x;
 	grad->accu.y += grad->gradiant.y;
 	grad->accu.z += grad->gradiant.z;
-	result.r = round(grad->accu.x);
-	result.g = round(grad->accu.y);
-	result.b = round(grad->accu.z);
-	return (result);
+	color.r = round(grad->accu.x);
+	color.g = round(grad->accu.y);
+	color.b = round(grad->accu.z);
+	return (color);
 }
