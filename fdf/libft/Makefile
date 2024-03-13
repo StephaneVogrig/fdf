@@ -6,7 +6,7 @@
 #    By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/02 02:59:52 by svogrig           #+#    #+#              #
-#    Updated: 2024/02/22 03:33:29 by svogrig          ###   ########.fr        #
+#    Updated: 2024/02/25 13:51:18 by svogrig          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -130,7 +130,7 @@ all : $(NAME)
 	
 $(NAME) : $(OBJS)
 	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
-	$(info created: $@)
+	$(info $@ : created)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	$(DIR_DUP)
@@ -139,19 +139,23 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 
 -include $(DEPS)
 
-clean:
-	$(RM) $(OBJS) $(DEPS)
+clean: cleanlibft
+	$(info libft: clean executed)
 	
-fclean: clean
+fclean: cleanlibft
 	$(RM) $(NAME)
+	$(info libft: fclean executed)
 
 re:
 	$(MAKE) fclean
 	$(MAKE) all
 
+cleanlibft:
+	rm -rf $(BUILD_DIR)
+
 #------------------------------------------------------------------------------#
 # specifications                                                               #
 #------------------------------------------------------------------------------#
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re cleanlibft
 .SILENT:

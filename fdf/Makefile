@@ -6,14 +6,16 @@
 #    By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/03 19:41:13 by stephane          #+#    #+#              #
-#    Updated: 2024/02/25 04:47:56 by svogrig          ###   ########.fr        #
+#    Updated: 2024/02/25 13:57:26 by svogrig          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:=	fdf
 NAME_BONUS	:=	fdf_bonus
 NAME_DEBUG	:=	fdf_debug
+NAME_DEBUGB	:=	fdf_bonusdebug
 NAME_SAN	:=	fdf_sanitize
+NAME_SANB	:=	fdf_bonussanitize
 
 # sources ---------------------------------------------------------------------#
 
@@ -89,7 +91,9 @@ DIR_BUILD	:=	.build
 OBJ			:=	$(SRC:$(DIR_SRC)/%.c=$(DIR_BUILD)/%.o)
 OBJ_BONUS	:=	$(SRC_BONUS:$(DIR_SRC)/%.c=$(DIR_BUILD)/%.o)
 OBJ_DEBUG	:=	$(SRC:$(DIR_SRC)/%.c=$(DIR_BUILD)/debug/%.o)
+OBJ_DEBUGB	:=	$(SRC_BONUS:$(DIR_SRC)/%.c=$(DIR_BUILD)/debugbonus/%.o)
 OBJ_SAN		:=	$(SRC:$(DIR_SRC)/%.c=$(DIR_BUILD)/sanitize/%.o)
+OBJ_SANB	:=	$(SRC_BONUS:$(DIR_SRC)/%.c=$(DIR_BUILD)/sanitize/%.o)
 
 DEPS		:=	$(OBJ:.o=.d) $(OBJ_SAN:.o=.d) $(OBJ_BONUS:.o=.d)
 
@@ -115,12 +119,19 @@ all:
 
 clean:
 	@$(MAKE) -C libft clean
-	@$(MAKE) -C mlx_linux clean
-	@rm -f $(OBJ) $(OBJ_BONUS) $(OBJ_DEBUG) $(OBJ_SAN) $(DEPS)
+	@rm -rf $(DIR_BUILD)
+#	@rm -f $(OBJ) $(OBJ_BONUS) $(OBJ_DEBUG) $(OBJ_SAN) $(OBJ_DEBUGB) $(OBJ_SANB) $(DEPS)
 
-fclean: clean
+fclean:
 	@$(MAKE) -C libft fclean
-	@rm -f $(NAME) $(NAME_BONUS) $(NAME_DEBUG) $(NAME_SAN)
+	@$(MAKE) -C mlx_linux clean
+	@rm -rf $(DIR_BUILD)
+	@rm -f	$(NAME) \
+			$(NAME_BONUS) \
+			$(NAME_DEBUG) \
+			$(NAME_SAN) \
+			$(NAME_DEBUGB) \
+			$(NAME_SANB)
 
 re: fclean
 	@$(MAKE) -j makeall
@@ -128,7 +139,7 @@ re: fclean
 bonus:
 	@$(MAKE) -j makebonus
 
-rebonus: re bonus
+rebonus: fclean bonus
 
 run: all
 	@- ./$(NAME) test_maps_2/France.XXL.fdf
@@ -139,37 +150,53 @@ runbonus: bonus
 debug:
 	@$(MAKE) -j makedebug
 
+debugbonus:
+	@$(MAKE) -j makedebugb
+
 valgrind: debug
 	@- valgrind $(VAL_FLAGS) ./$(NAME_DEBUG) test_maps/elem-col.fdf
+
+valgrindbonus: debugbonus
+	@- valgrind $(VAL_FLAGS) ./$(NAME_DEBUGB) test_maps/elem-col.fdf
 
 sanitize:
 	@$(MAKE) -j makesanitize
 	@- ./$(NAME_SAN) test_maps/elem-col.fdf
 
-gprofb:
-	@$(MAKE) -j makegprofb
+sanitizebonus:
+	@$(MAKE) -j makesanitizeb
+	@- ./$(NAME_SANB) test_maps/elem-col.fdf
 
 makeall:		$(NAME)
 makebonus:		$(NAME_BONUS)
 makedebug:		$(NAME_DEBUG)
+makedebugb:		$(NAME_DEBUGB)
 makesanitize:	$(NAME_SAN)
-makegprofb:		$(NAME_GPROFB)
+makesanitizeb:	$(NAME_SANB)
 
 $(NAME): $(OBJ) $(LIB_MLX) $(LIB_FT)
 	@$(CC) $(CC_FLAGS) $(OBJ) $(L_FLAG) $(l_FLAG) -o $(NAME)
 	$(info created : $(NAME))
 
 $(NAME_BONUS): $(OBJ_BONUS) $(LIB_MLX) $(LIB_FT)
-	@$(CC) $(CC_FLAGS) $(OBJ_BONUS) $(L_FLAG) $(l_FLAG) -pg -o $(NAME_BONUS)
+	@$(CC) $(CC_FLAGS) $(OBJ_BONUS) $(L_FLAG) $(l_FLAG) -o $(NAME_BONUS)
 	$(info created : $(NAME_BONUS))
 
 $(NAME_DEBUG): $(OBJ_DEBUG) $(LIB_MLX) $(LIB_FT)
-	@$(CC) $(CC_FLAGS) $(OBJ) $(L_FLAG) $(l_FLAG) -g -o $(NAME_DEBUG)
+	@$(CC) $(CC_FLAGS) $(OBJ_DEBUG) $(L_FLAG) $(l_FLAG) -g -o $(NAME_DEBUG)
 	$(info created : $(NAME_DEBUG))
+
+$(NAME_DEBUGB): $(OBJ_DEBUGB) $(LIB_MLX) $(LIB_FT)
+	@$(CC) $(CC_FLAGS) $(OBJ_DEBUGB) $(L_FLAG) $(l_FLAG) -g -o $(NAME_DEBUGB)
+	$(info created : $(NAME_DEBUGB))
 
 $(NAME_SAN): $(OBJ_SAN) $(LIB_MLX) $(LIB_FT)
 	@$(CC) $(OBJ_SAN) $(L_FLAG) $(l_FLAG) $(SAN_FLAGS) -o $(NAME_SAN)
 	$(info created : $(NAME_SAN))
+
+$(NAME_SANB): $(OBJ_SANB) $(LIB_MLX) $(LIB_FT)
+	@$(CC) $(OBJ_SANB) $(L_FLAG) $(l_FLAG) $(SAN_FLAGS) -o $(NAME_SANB)
+	$(info created : $(NAME_SANB))
 
 $(DIR_BUILD)/%.o: $(DIR_SRC)/%.c
 	@mkdir -p $(@D)
@@ -177,6 +204,11 @@ $(DIR_BUILD)/%.o: $(DIR_SRC)/%.c
 	$(info created : $@)
 
 $(DIR_BUILD)/debug/%.o: $(DIR_SRC)/%.c
+	@mkdir -p $(@D)
+	@$(CC) $(CC_FLAGS) $(I_FLAG) $(DEBUG_FLAGS) -c $< -o $@
+	$(info created : $@)
+
+$(DIR_BUILD)/debugbonus/%.o: $(DIR_SRC)/%.c
 	@mkdir -p $(@D)
 	@$(CC) $(CC_FLAGS) $(I_FLAG) $(DEBUG_FLAGS) -c $< -o $@
 	$(info created : $@)
@@ -198,4 +230,23 @@ $(LIB_MLX):
 # specifications                                                               #
 #------------------------------------------------------------------------------#
 
-.PHONY: all clean fclean re run mlx
+.PHONY: all \
+		clean \
+		fclean \
+		re \
+		bonus \
+		rebonus \
+		run \
+		runbonus \
+		debug \
+		debugbonus \
+		valgrind \
+		valgrindbonus \
+		sanitize \
+		sanitizebonus \
+		makeall \
+		makebonus \
+		makedebug \
+		makedebugb \
+		makesanitize \
+		makesanitizeb
