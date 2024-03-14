@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   map_transform_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stephane <stephane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 05:15:59 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 22:27:38 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/27 02:00:39 by stephane         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "fdf_bonus.h"
 
@@ -55,6 +55,7 @@ void	map_scale_z(t_fdf *fdf, int keycode)
 		fdf->transform.scale_z += 0.005;
 	if (keycode == KEY_PGDOWN)
 		fdf->transform.scale_z -= 0.005;
+	transform_resize(&fdf->transform, &fdf->map, &fdf->img);
 	render(fdf);
 }
 

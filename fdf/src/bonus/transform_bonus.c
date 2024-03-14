@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   transform_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stephane <stephane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:43:41 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/24 04:29:59 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/27 02:05:01 by stephane         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "fdf_bonus.h"
 
@@ -21,6 +21,23 @@ t_float32	scale(float width_map, float high_map, int width_img, int high_img)
 	if (scale.x < scale.y)
 		return (scale.x);
 	return (scale.y);
+}
+
+
+inline t_vec2f	compute_point_conic(float x, float y, float z, t_transform *t)
+{
+	t_vec2f	point;
+	float	point_z;
+
+	x -= t->camera.x;
+	y -= t->camera.y;
+	z -= t->camera.z;
+	z *= t->scale_z;
+	point_z = -(t->c1 * x + t->c2 * y + t->c3 * z);
+	point.x = t->dx + t->scale * (t->a1 * x + t->a2 * y + t->a3 * z) / point_z;
+	point.y = t->dy + t->scale * (t->b1 * x + t->b2 * y + t->b3 * z) / point_z;
+	return (point);
+	
 }
 
 inline t_vec2f	compute_point(float x, float y, float z, t_transform *t)
@@ -41,7 +58,7 @@ t_bound	bounding_box_projection(t_map *map, t_transform *t)
 	t_vec2f	current;
 	t_vec2i	i;
 
-	current = compute_point(0, 0, map->datas[0][0].z, t);
+	current = compute_point_conic(0, 0, map->datas[0][0].z, t);
 	bb.min = current;
 	bb.max = bb.min;
 	i.y = -1;
@@ -50,7 +67,7 @@ t_bound	bounding_box_projection(t_map *map, t_transform *t)
 		i.x = -1;
 		while (++i.x < map->nbr_col)
 		{
-			current = compute_point(i.x, i.y, map->datas[i.y][i.x].z, t);
+			current = compute_point_conic(i.x, i.y, map->datas[i.y][i.x].z, t);
 			if (current.x < bb.min.x)
 				bb.min.x = current.x;
 			if (current.y < bb.min.y)
@@ -94,8 +111,12 @@ void	transform_init(t_transform *t, t_map *map, t_fdf_img *img)
 {
 	t->offset_map.x = -(float)(map->nbr_col - 1) / 2;
 	t->offset_map.y = -(float)(map->nbr_line - 1) / 2;
-	projection_iso(t);
+	t->camera.x = map->nbr_col * 2;
+	t->camera.y = map->nbr_line * 2;
+	t->camera.z = map->z_max * 2;
+	// projection_iso(t);
 	t->rot = vector3f(90 - 35.26, 0.0, 45.0);
 	t->scale_z = 1;
+	projection_gen(t, t->rot);
 	transform_resize(t, map, img);
 }

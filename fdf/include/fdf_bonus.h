@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fdf_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stephane <stephane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 22:03:51 by stephane          #+#    #+#             */
-/*   Updated: 2024/02/24 03:28:23 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/27 01:39:57 by stephane         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef FDF_BONUS_H
 # define FDF_BONUS_H
@@ -70,6 +70,7 @@
 
 typedef struct s_transform{
 	t_vec2f	offset_map;
+	t_vec3i	camera;
 	t_vec3f	rot;
 	float	scale;
 	float	dx;
@@ -166,8 +167,10 @@ void	update_screen(t_fdf *fdf, clock_t ticks);
 void	transform_init(t_transform *transform, t_map *map, t_fdf_img *img);
 void	transform_resize(t_transform *t, t_map *map, t_fdf_img *img);
 t_vec2f	compute_point(float x, float y, float z, t_transform *t);
+t_vec2f	compute_point_conic(float x, float y, float z, t_transform *t);
 
-/* z -------------------------------------------------------------------------*/
+/* z -------------------------------------------------------------
+------------*/
 void	z_scale_10(t_fdf *fdf);
 void	find_minmax_z(t_map *map, t_data **datas);
 

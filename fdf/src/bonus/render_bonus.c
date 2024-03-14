@@ -1,24 +1,23 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   render_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stephane <stephane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 03:18:27 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/22 22:36:57 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/26 15:20:06 by stephane         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "fdf_bonus.h"
 
 void	put_nbr_on_img(int nbr, t_fdf *fdf, int x, int y)
 {
 	char	str_nbr[16];
-	char	*txt;
 
 	ft_bzero(str_nbr, 16);
-	txt = si32_to_decstr_offset(str_nbr, nbr);
+	si32_to_decstr_offset(str_nbr, nbr);
 	mlx_string_put(fdf->mlx, fdf->win, x, y, 0xffffff, str_nbr);
 }
 

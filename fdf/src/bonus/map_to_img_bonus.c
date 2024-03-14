@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   map_to_img_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svogrig <svogrig@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stephane <stephane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 05:29:54 by svogrig           #+#    #+#             */
-/*   Updated: 2024/02/24 04:50:32 by svogrig          ###   ########.fr       */
+/*   Updated: 2024/02/27 01:38:49 by stephane         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "fdf_bonus.h"
 
@@ -17,7 +17,7 @@ t_pixel	compute_pixel(int x, int y, t_data data, t_transform *t)
 	t_vec2f	point;
 	t_pixel	pixel;
 
-	point = compute_point(x, y, data.z, t);
+	point = compute_point_conic(x, y, data.z, t);
 	pixel.x = round(point.x);
 	pixel.y = round(point.y);
 	pixel.color.ui = data.color.ui;
